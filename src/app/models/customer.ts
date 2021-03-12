@@ -3,5 +3,5 @@ export interface Customer {
   companyName: string;
   userFirstName: string;
   userLastName: string;
-  email:string;
+  eMail:string;
 }
