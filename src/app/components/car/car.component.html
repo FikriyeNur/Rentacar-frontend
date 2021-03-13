@@ -1,4 +1,8 @@
-<table class="table table-striped">
+<h2 class="text-center">Car List</h2>
+<div *ngIf="dataLoaded == false" class="spinner-border text-info" role="status">
+  <span class="visually-hidden">Loading...</span>
+</div>
+<table *ngIf="dataLoaded != false" class="table table-striped">
   <thead>
     <tr>
       <th>Car Id</th>
