@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Model } from 'src/app/models/model';
+import { ModelDetailDto } from 'src/app/models/modelDetailDto';
 import { ModelService } from 'src/app/services/model.service';
 
 @Component({
@@ -8,7 +8,7 @@ import { ModelService } from 'src/app/services/model.service';
   styleUrls: ['./model.component.css'],
 })
 export class ModelComponent implements OnInit {
-  models: Model[] = [];
+  models: ModelDetailDto[] = [];
 
   constructor(private modelService: ModelService) {}
 
