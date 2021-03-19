@@ -1,8 +1,5 @@
-<h2 class="text-center">Car List</h2>
-<div *ngIf="dataLoaded == false" class="spinner-border text-info" role="status">
-  <span class="visually-hidden">Loading...</span>
-</div>
-<table *ngIf="dataLoaded != false" class="table table-striped">
+<h2 class="text-center">Car Details</h2>
+<table class="table table-striped">
   <thead>
     <tr>
       <th>Car Id</th>
@@ -12,11 +9,10 @@
       <th>Color Name</th>
       <th>Daily Price</th>
       <th>Description</th>
-      <th>Detail</th>
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let car of cars">
+    <tr *ngFor="let car of carDetails">
       <td>{{ car.carId }}</td>
       <td>{{ car.brandName }}</td>
       <td>{{ car.modelName }}</td>
@@ -24,15 +20,7 @@
       <td>{{ car.colorName }}</td>
       <td>{{ car.dailyPrice }}₺</td>
       <td>{{ car.description }}</td>
-      <td>
-        <button
-          type="button"
-          class="btn btn-success"  
-          routerLink="/cars/details/{{ car.carId }}"
-        >
-          Details
-        </button>
-      </td>
     </tr>
   </tbody>
 </table>
+
