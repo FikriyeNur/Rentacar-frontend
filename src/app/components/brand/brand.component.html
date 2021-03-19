@@ -3,7 +3,12 @@
     <th>Brand Name</th>
   </thead>
   <ul class="list-group">
-    <li class="list-group-item" *ngFor="let brand of brands">
+    <li
+      [class]="getCurrentBrandClass(brand)"
+      (click)="setCurrentBrand(brand)"
+      routerLink="/cars/brand/{{ brand.brandId }}"
+      *ngFor="let brand of brands"
+    >
       {{ brand.brandName }}
     </li>
   </ul>
