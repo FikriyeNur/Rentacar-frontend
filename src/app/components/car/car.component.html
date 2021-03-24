@@ -1,18 +1,18 @@
-<h2 class="text-center">Car List</h2>
+<h2 class="text-center">Araç Listesi</h2>
 <div *ngIf="dataLoaded == false" class="spinner-border text-info" role="status">
   <span class="visually-hidden">Loading...</span>
 </div>
 <table *ngIf="dataLoaded != false" class="table table-striped">
   <thead>
     <tr>
-      <th>Car Id</th>
-      <th>Brand Name</th>
-      <th>Model Name</th>
-      <th>Model Year</th>
-      <th>Color Name</th>
-      <th>Daily Price</th>
-      <th>Description</th>
-      <th>Detail</th>
+      <th>Araç Id</th>
+      <th>Marka</th>
+      <th>Model</th>
+      <th>Model Yılı</th>
+      <th>Renk</th>
+      <th>Günlük Ücret</th>
+      <th>Açıklama</th>
+      <th>Detay</th>
     </tr>
   </thead>
   <tbody>
@@ -22,15 +22,15 @@
       <td>{{ car.modelName }}</td>
       <td>{{ car.modelYear }}</td>
       <td>{{ car.colorName }}</td>
-      <td>{{ car.dailyPrice }}₺</td>
+      <td>{{ car.dailyPrice | currency: "₺" }}</td>
       <td>{{ car.description }}</td>
       <td>
         <button
           type="button"
-          class="btn btn-success"  
+          class="btn btn-success"
           routerLink="/cars/details/{{ car.carId }}"
         >
-          Details
+          Araç Detayı
         </button>
       </td>
     </tr>

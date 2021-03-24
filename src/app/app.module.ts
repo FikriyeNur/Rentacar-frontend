@@ -13,6 +13,7 @@ import { NaviComponent } from './components/navi/navi.component';
 import { HttpClientModule } from '@angular/common/http';
 import { CarDetailComponent } from './components/car-detail/car-detail.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -23,7 +24,7 @@ import { CarDetailComponent } from './components/car-detail/car-detail.component
     CarComponent,
     RentalComponent,
     NaviComponent,
-    CarDetailComponent,
+    CarDetailComponent
   ],
   imports: [
     BrowserModule,
