@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Brand } from 'src/app/models/brand';
 import { CarDetailDto } from 'src/app/models/carDetailDto';
+import { Color } from 'src/app/models/color';
 import { CarService } from 'src/app/services/car.service';
 
 @Component({
@@ -11,9 +13,9 @@ import { CarService } from 'src/app/services/car.service';
 export class CarComponent implements OnInit {
   cars: CarDetailDto[] = [];
   dataLoaded = false;
-  imageBasePath = 'https://localhost:44379';
   filterTextBrand = '';
   filterTextColor = '';
+  imageBasePath = 'https://localhost:44379';
 
   constructor(
     private carService: CarService,
@@ -58,12 +60,6 @@ export class CarComponent implements OnInit {
     this.carService.getCarsByColor(colorId).subscribe((response) => {
       this.cars = response.data;
       this.dataLoaded = true;
-    });
-  }
-
-  getEconomicCars() {
-    this.carService.getEconomicCars().subscribe((response) => {
-      this.cars = response.data;
     });
   }
 }
