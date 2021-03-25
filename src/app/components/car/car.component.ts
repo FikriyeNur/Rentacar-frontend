@@ -58,4 +58,10 @@ export class CarComponent implements OnInit {
       this.dataLoaded = true;
     });
   }
+
+  getEconomicCars() {
+    this.carService.getEconomicCars().subscribe((response) => {
+      this.cars = response.data;
+    });
+  }
 }
