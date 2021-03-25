@@ -12,6 +12,8 @@ export class CarComponent implements OnInit {
   cars: CarDetailDto[] = [];
   dataLoaded = false;
   imageBasePath = 'https://localhost:44379';
+  filterTextBrand = '';
+  filterTextColor = '';
 
   constructor(
     private carService: CarService,
