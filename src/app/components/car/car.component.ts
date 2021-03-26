@@ -9,13 +9,12 @@ import { CarService } from 'src/app/services/car.service';
   styleUrls: ['./car.component.css'],
 })
 export class CarComponent implements OnInit {
-  
   cars: CarDetailDto[] = [];
   dataLoaded = false;
   filterTextBrand = '';
   filterTextColor = '';
-  imageBasePath = 'https://localhost:44379';
-  carDefaultImage="https://localhost:44379/Images/Default.png"
+  imageBasePath = 'https://localhost:44379/';
+  carDefaultImage = 'https://localhost:44379/Images/Default.png';
 
   constructor(
     private carService: CarService,
@@ -63,7 +62,11 @@ export class CarComponent implements OnInit {
     });
   }
 
-  getImagePath(image:string ) {
-    return this.imageBasePath+ "Images/" + image;
+  getImagePath(car: CarDetailDto) {
+    if (car.imagePath) {
+      return this.imageBasePath + 'Images/' + car.imagePath;
+    } else {
+      return this.carDefaultImage;
+    }
   }
 }

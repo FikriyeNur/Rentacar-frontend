@@ -38,21 +38,11 @@
     "
   >
     <div class="card h-100">
-      <img *ngIf="car.imagePath"
-      src="{{imageBasePath}}/Images/{{car.imagePath}}"
-      class="card-img-top"
-      alt="{{imageBasePath}}/Images/{{car.imagePath}}"
-      />
-      <img *ngIf="!car.imagePath"
-      src="{{carDefaultImage}}"
-      class="card-img-top"
-      alt="{{carDefaultImage}}"
-      />
-      <!-- <img
-        [src]="getImagePath(car.imagePath)"
+      <img
+        [src]="getImagePath(car)"
         class="card-img-top"
-        [alt]="getImagePath(car.imagePath)"
-      /> -->
+        [alt]="getImagePath(car)"
+      />
       <div class="card-body">
         <p class="card-text">Marka : {{ car.brandName }}</p>
         <p class="card-text">Model : {{ car.modelName }}</p>

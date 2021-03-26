@@ -8,11 +8,22 @@ import { RentalDetailDto } from '../models/rentalDetailDto';
   providedIn: 'root',
 })
 export class RentalService {
-  apiUrl = 'https://localhost:44379/api/rentals/getalldto';
+  apiUrl = 'https://localhost:44379/api/';
 
   constructor(private httpClient: HttpClient) {}
 
   getRentals(): Observable<ListResponseModel<RentalDetailDto>> {
-    return this.httpClient.get<ListResponseModel<RentalDetailDto>>(this.apiUrl);
+    let newPath = this.apiUrl + 'rentals/getalldto';
+    return this.httpClient.get<ListResponseModel<RentalDetailDto>>(newPath);
+  }
+
+  addRental(
+    rental: RentalDetailDto
+  ): Observable<ListResponseModel<RentalDetailDto>> {
+    let newPath = this.apiUrl + 'rentals/getalldto';
+    return this.httpClient.post<ListResponseModel<RentalDetailDto>>(
+      newPath,
+      rental
+    );
   }
 }
