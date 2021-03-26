@@ -1,4 +1,4 @@
-<br>
+<br />
 <div class="form row">
   <div class="col">
     <label for="filterTextBrand" class="form-label"><h6>Marka Ara</h6></label>
@@ -21,49 +21,61 @@
     />
   </div>
 </div>
-<br /><br>
+<br /><br />
 
 <h2 class="text-center">Araç Listesi</h2>
 <div *ngIf="dataLoaded == false" class="spinner-border text-info" role="status">
   <span class="visually-hidden">Loading...</span>
 </div>
-<table *ngIf="dataLoaded != false" class="table table-striped">
-  <thead>
-    <tr>
-      <th>Araç Id</th>
-      <th>Marka</th>
-      <th>Model</th>
-      <th>Model Yılı</th>
-      <th>Renk</th>
-      <th>Günlük Ücret</th>
-      <th>Açıklama</th>
-      <th>Detay</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr
-      *ngFor="
-        let car of cars
-          | filterBrand: filterTextBrand
-          | filterColor: filterTextColor
-      "
-    >
-      <td>{{ car.carId }}</td>
-      <td>{{ car.brandName }}</td>
-      <td>{{ car.modelName }}</td>
-      <td>{{ car.modelYear }}</td>
-      <td>{{ car.colorName }}</td>
-      <td>{{ car.dailyPrice | currency: "₺" }}</td>
-      <td>{{ car.description }}</td>
-      <td>
+
+<div class="row row-cols-1 row-cols-md-3 g-4">
+  <div
+    class="col"
+    *ngFor="
+      let car of cars
+        | filterBrand: filterTextBrand
+        | filterColor: filterTextColor
+    "
+  >
+    <div class="card h-100">
+      <img *ngIf="car.imagePath"
+      src="{{imageBasePath}}/Images/{{car.imagePath}}"
+      class="card-img-top"
+      alt="{{imageBasePath}}/Images/{{car.imagePath}}"
+      />
+      <img *ngIf="!car.imagePath"
+      src="{{carDefaultImage}}"
+      class="card-img-top"
+      alt="{{carDefaultImage}}"
+      />
+      <!-- <img
+        [src]="getImagePath(car.imagePath)"
+        class="card-img-top"
+        [alt]="getImagePath(car.imagePath)"
+      /> -->
+      <div class="card-body">
+        <p class="card-text">Marka : {{ car.brandName }}</p>
+        <p class="card-text">Model : {{ car.modelName }}</p>
+        <p class="card-text">Model Yılı : {{ car.modelYear }}</p>
+        <p class="card-text">Renk : {{ car.colorName }}</p>
+        <p class="card-text">Günlük Ücret : {{ car.dailyPrice }} ₺</p>
+      </div>
+      <div class="card-footer d-flex justify-content-between">
         <button
-          type="button"
-          class="btn btn-success"
-          routerLink="/cars/details/{{ car.carId }}"
+        type="button"
+        class="btn btn-success"
+        routerLink="/cars/details/{{ car.carId }}"
         >
           Araç Detayı
         </button>
-      </td>
-    </tr>
-  </tbody>
-</table>
+        <button
+        type="button"
+        class="btn btn-success"
+        routerLink="/carrental"
+        >
+          Kirala
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

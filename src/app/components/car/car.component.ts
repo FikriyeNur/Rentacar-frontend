@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Brand } from 'src/app/models/brand';
 import { CarDetailDto } from 'src/app/models/carDetailDto';
-import { Color } from 'src/app/models/color';
 import { CarService } from 'src/app/services/car.service';
 
 @Component({
@@ -17,6 +15,7 @@ export class CarComponent implements OnInit {
   filterTextBrand = '';
   filterTextColor = '';
   imageBasePath = 'https://localhost:44379';
+  carDefaultImage="https://localhost:44379/Images/Default.png"
 
   constructor(
     private carService: CarService,
@@ -62,5 +61,9 @@ export class CarComponent implements OnInit {
       this.cars = response.data;
       this.dataLoaded = true;
     });
+  }
+
+  getImagePath(image:string ) {
+    return this.imageBasePath+ "Images/" + image;
   }
 }

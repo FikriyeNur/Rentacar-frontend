@@ -2,10 +2,9 @@
 <table *ngIf="dataLoaded!=false" class="table table-striped">
   <thead>
     <tr>
-      <th>Customer Id</th>
-      <th>Company Name</th>
-      <th>First Name</th>
-      <th>Last Name</th>
+      <th>Müşteri Id</th>
+      <th>Şirket Adı</th>
+      <th>Müşteri Ad Soyad</th>
       <th>E-Mail</th>
     </tr>
   </thead>
@@ -13,8 +12,7 @@
     <tr *ngFor="let customer of customers">
       <td>{{customer.customerId}}</td>
       <td>{{customer.companyName}}</td>
-      <td>{{customer.userFirstName}}</td>
-      <td>{{customer.userLastName}}</td>
+      <td>{{customer.userFirstName}} {{customer.userLastName}}</td>
       <td>{{customer.eMail}}</td>
     </tr>
   </tbody>

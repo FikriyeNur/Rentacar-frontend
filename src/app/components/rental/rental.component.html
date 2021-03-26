@@ -1,23 +1,21 @@
-<h2 class="text-center">Rental List</h2>
+<h2 class="text-center">Araç Kiralama Listesi</h2>
 <table  *ngIf="dataLoaded!==false" class="table table-striped">
 <thead>
     <tr>
-        <th>Rental Id</th>
-        <th>Company Name</th>
-        <th>First Name</th>
-        <th>Last Name</th>
-        <th>Brand Name</th>
-        <th>Model Name</th>
-        <th>Rent Date</th>
-        <th>Return Date</th>
+        <th>Kiralama Id</th>
+        <th>Şirket Adı</th>
+        <th>Müşteri Ad Soyad</th>
+        <th>Marka</th>
+        <th>Model</th>
+        <th>Kiralama Tarihi</th>
+        <th>Araç Teslim Tarihi</th>
     </tr>
 </thead>
 <tbody>
     <tr *ngFor="let rental of rentals">
         <td>{{rental.id}}</td>
         <td>{{rental.companyName}}</td>
-        <td>{{rental.userFirstName}}</td>
-        <td>{{rental.userLastName}}</td>
+        <td>{{rental.userFirstName}} {{rental.userLastName}}</td>
         <td>{{rental.brandName}}</td>
         <td>{{rental.modelName}}</td>
         <td>{{rental.rentDate | date:"d.M.yy h:mm:ss"}}</td>
