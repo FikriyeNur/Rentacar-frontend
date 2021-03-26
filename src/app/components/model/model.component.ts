@@ -8,6 +8,7 @@ import { ModelService } from 'src/app/services/model.service';
   styleUrls: ['./model.component.css'],
 })
 export class ModelComponent implements OnInit {
+  
   models: ModelDetailDto[] = [];
 
   constructor(private modelService: ModelService) {}

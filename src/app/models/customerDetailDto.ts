@@ -4,4 +4,5 @@ export interface CustomerDetailDto {
   userFirstName: string;
   userLastName: string;
   eMail:string;
+  
 }

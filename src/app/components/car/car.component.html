@@ -1,21 +1,27 @@
-<div class="mb-3">
-  <label for="filterTextBrand" class="form-label"><h6>Marka Ara</h6></label>
-  <input
-    type="text"
-    [(ngModel)]="filterTextBrand"
-    class="form-control"
-    id="filterTextBrand"
-    placeholder="marka giriniz.."
-  /><br>
-  <label for="filterTextColor" class="form-label"><h6>Renk Ara</h6></label>
-  <input
-    type="text"
-    [(ngModel)]="filterTextColor"
-    class="form-control"
-    id="filterTextColor"
-    placeholder="renk giriniz.."
-  />
-</div><br>
+<br>
+<div class="form row">
+  <div class="col">
+    <label for="filterTextBrand" class="form-label"><h6>Marka Ara</h6></label>
+    <input
+      type="text"
+      [(ngModel)]="filterTextBrand"
+      class="form-control"
+      id="filterTextBrand"
+      placeholder="marka giriniz.."
+    />
+  </div>
+  <div class="col">
+    <label for="filterTextColor" class="form-label"><h6>Renk Ara</h6></label>
+    <input
+      type="text"
+      [(ngModel)]="filterTextColor"
+      class="form-control"
+      id="filterTextColor"
+      placeholder="renk giriniz.."
+    />
+  </div>
+</div>
+<br /><br>
 
 <h2 class="text-center">Araç Listesi</h2>
 <div *ngIf="dataLoaded == false" class="spinner-border text-info" role="status">
@@ -35,7 +41,13 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let car of cars | filterBrand:filterTextBrand |filterColor:filterTextColor">
+    <tr
+      *ngFor="
+        let car of cars
+          | filterBrand: filterTextBrand
+          | filterColor: filterTextColor
+      "
+    >
       <td>{{ car.carId }}</td>
       <td>{{ car.brandName }}</td>
       <td>{{ car.modelName }}</td>

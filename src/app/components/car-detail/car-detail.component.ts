@@ -48,5 +48,4 @@ export class CarDetailComponent implements OnInit {
   getImagePath(image: CarImage) {
     return this.imageBasePath+ "Images/" + image.imagePath;
   }
-
 }

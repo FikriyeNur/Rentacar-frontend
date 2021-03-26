@@ -12,8 +12,8 @@ import { ColorService } from 'src/app/services/color.service';
 export class CarFilterComponent implements OnInit {
   brands: Brand[];
   colors: Color[];
-  brandFilter: string;
-  colorFilter: string;
+  brandFilter: number;
+  colorFilter: number;
 
   constructor(
     private brandService: BrandService,
@@ -37,11 +37,19 @@ export class CarFilterComponent implements OnInit {
     });
   }
 
-  // getSelectedBrand(brandId: number) {
-  //   if (this.brandFilter == brandName) {
-  //     return true;
-  //   } else {
-  //     return false;
-  //   }
-  // }
+  getSelectedBrand(brandId: number) {
+    if (this.brandFilter == brandId) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  getSelectedColor(colorId: number) {
+    if (this.colorFilter == colorId) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 }

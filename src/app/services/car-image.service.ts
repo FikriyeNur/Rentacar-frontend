@@ -9,7 +9,6 @@ import { ListResponseModel } from '../models/listResponseModel';
 })
 export class CarImageService {
   apiUrl = 'https://localhost:44379/api/carimages/';
-
   constructor(private httpClient: HttpClient) {}
 
   getCarImagesByCarId(carId: number): Observable<ListResponseModel<CarImage>> {

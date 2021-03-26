@@ -33,4 +33,5 @@ export class ColorComponent implements OnInit {
       return "list-group-item"
     }
   }
+  
 }

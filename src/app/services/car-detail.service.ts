@@ -9,7 +9,6 @@ import { SingleResponseModel } from '../models/singleResponseModel';
 })
 export class CarDetailService {
   apiUrl = 'https://localhost:44379/api/cars/getbyiddto?id=';
-
   constructor(private httpClient: HttpClient) {}
 
   getCarDetails(carId: number): Observable<SingleResponseModel<CarDetailDto>> {

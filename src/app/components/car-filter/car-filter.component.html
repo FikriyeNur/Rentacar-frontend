@@ -1,11 +1,41 @@
-<!-- <br>
-<select class="form-select">
-  <option selected>Marka Seçiniz</option>
+<br />
+<h6>Marka Seçiniz</h6>
+<select class="form-select" [(ngModel)]="brandFilter">
   <option
-    [(ngModel)]="getSelectedBrand"
+    class="form-select mb-3"
     *ngFor="let brand of brands"
-    value="{{ brand.brandName }}"
+    value="{{ brand.brandId }}"
+    [selected]="getSelectedBrand(brand.brandId)"
   >
     {{ brand.brandName }}
   </option>
-</select> -->
+</select>
+<br />
+
+<h6>Renk Seçiniz</h6>
+<select class="form-select" [(ngModel)]="colorFilter">
+  <option
+    class="form-select mb-3"
+    *ngFor="let color of colors"
+    value="{{ color.colorId }}"
+    [selected]="getSelectedColor(color.colorId)"
+  >
+    {{ color.colorName }}
+  </option>
+</select>
+<br />
+
+<div class="col-lg-auto col-sm-12">
+  <button
+    class="btn btn-outline-secondary me-3"
+    type="button"
+    routerLink="cars/filter/{{ brandFilter }}/{{ colorFilter }}"
+  >
+    Filterele
+  </button>
+  <button class="btn btn-outline-danger" type="button" routerLink="cars">
+    Temizle
+  </button>
+</div>
+
+<br />

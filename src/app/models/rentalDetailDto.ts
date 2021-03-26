@@ -7,4 +7,5 @@ export interface RentalDetailDto{
     modelName:string;
     rentDate:Date;
     returnDate:Date;
+    
 }

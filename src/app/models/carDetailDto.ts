@@ -9,4 +9,5 @@ export interface CarDetailDto {
   colorName: string;
   dailyPrice: number;
   description: string;
+  
 }

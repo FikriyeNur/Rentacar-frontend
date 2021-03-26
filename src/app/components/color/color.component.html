@@ -1,8 +1,6 @@
-<table class="table">
-  <thead>
-    <th>Renkler</th>
-  </thead>
+  <br>
   <ul class="list-group">
+    <li class="list-group-item active" aria-current="true">Renkler</li>
     <li
       [class]="getCurrentColorClass(color)"
       (click)="setCurrentColor(color)"
@@ -12,4 +10,3 @@
       {{ color.colorName }}
     </li>
   </ul>
-</table>

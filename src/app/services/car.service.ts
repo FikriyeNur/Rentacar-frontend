@@ -9,7 +9,6 @@ import { ListResponseModel } from '../models/listResponseModel';
 })
 export class CarService {
   apiUrl = 'https://localhost:44379/api/';
-
   constructor(private httpClient: HttpClient) {}
 
   getCars(): Observable<ListResponseModel<CarDetailDto>> {
