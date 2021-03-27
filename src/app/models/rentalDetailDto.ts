@@ -6,6 +6,5 @@ export interface RentalDetailDto{
     brandName:string;
     modelName:string;
     rentDate:Date;
-    returnDate:Date;
-    
+    returnDate:Date;  
 }

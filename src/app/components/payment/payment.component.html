@@ -1,0 +1,95 @@
+<br />
+<div class="card">
+  <h4 class="card-header text-center">Araç Bilgileri</h4>
+  <div class="card-body">
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Marka</th>
+          <th scope="col">Model</th>
+          <th scope="col">Model Yılı</th>
+          <th scope="col">Renk</th>
+          <th scope="col">Araç Bilgileri</th>
+          <th scope="col">Günlük Ücret</th>
+          <th scope="col">Toplam Ücret</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let car of carDetails">
+          <th scope="row">{{ car.brandName }}</th>
+          <th>{{ car.modelName }}</th>
+          <th>{{ car.modelYear }}</th>
+          <th>{{ car.colorName }}</th>
+          <th>{{ car.description }}</th>
+          <th>{{ car.dailyPrice }}</th>
+          <th style="color: cornflowerblue; font-weight: bold">
+            {{ totalRentPrice !== 0 }}
+          </th>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<br /><br />
+
+<div class="card">
+  <h4 class="card-header">Kredi Kartı İle Ödeme</h4>
+  <div class="card-body">
+    <div class="row gy-3">
+      <div class="col-md-3">
+        <label for="inputNameOnCard" class="form-label"
+          >Kart Üzerindeki İsim</label
+        >
+        <input
+          type="text"
+          class="form-control"
+          id="inputNameOnCard"
+          placeholder="Kart sahibinin adı ve soyadı"
+        />
+      </div>
+      <br /><br />
+
+      <div class="col-md-3">
+        <label for="inputCardNumber" class="form-label">Kart Numarası</label>
+        <input
+          type="text"
+          class="form-control"
+          id="inputCardNumber"
+          placeholder=" ••••   ••••   ••••   ••••"
+        />
+      </div>
+
+      <div class="col-md-2">
+        <label for="inputCardExpiration" class="form-label"
+          >Son Kullanma Tarihi</label
+        >
+        <input
+          type="text"
+          class="form-control"
+          id="inputCardExpiration"
+          placeholder="Ay / Yıl"
+        />
+      </div>
+
+      <div class="col-md-2">
+        <label for="inputCVV" class="form-label">Güvenlik Kodu</label>
+        <input
+          type="text"
+          class="form-control"
+          id="inputCVV"
+          placeholder="CVC / CVV"
+        />
+      </div>
+
+      <div class="d-grid gap-3">
+        <button class="btn btn-success mt-3" type="button">
+          Ödemeyi Gerçekleştir
+        </button>
+        <button class="btn btn-warning mt-3" type="button" routerLink="/cars">
+          İşlemi İptal Et
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -11,7 +11,7 @@ import { CarImageService } from 'src/app/services/car-image.service';
   styleUrls: ['./car-detail.component.css'],
 })
 export class CarDetailComponent implements OnInit {
-  carDetails: CarDetailDto;
+  carDetails: CarDetailDto ;
   carImages: CarImage[] = [];
   imageBasePath = 'https://localhost:44379/';
   dataLoaded: boolean = false;
@@ -34,6 +34,7 @@ export class CarDetailComponent implements OnInit {
   getCarDetails(carId: number) {
     this.carDetailService.getCarDetails(carId).subscribe((response) => {
       this.carDetails = response.data;
+      console.log(this.carDetails);
       this.dataLoaded = true;
     });
   }

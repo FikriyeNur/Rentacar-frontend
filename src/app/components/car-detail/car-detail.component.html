@@ -1,3 +1,4 @@
+<div class="continer">
 <h2 class="text-center">Araç Bilgileri</h2>
 <button type="button" class="btn btn-info" routerLink="/cars">
   Araç Listesine Geri Dön</button
@@ -32,15 +33,13 @@
       <h6>Renk : {{ carDetails.colorName }}</h6>
     </li>
     <li class="list-group-item list-group-item-warning" style="text-align: center">
-      <h6>Günlük Ücret : {{ carDetails.dailyPrice }}</h6>
+      <h6>Günlük Ücret : {{ carDetails.dailyPrice | currency:"₺" }}</h6>
     </li>
     <li class="list-group-item list-group-item-warning" style="text-align: center">
-      <h6>Açıklama : {{ carDetails.description }}</h6>
+      <h6>Araç Bilgileri : {{ carDetails.description }}</h6>
     </li>
   </ul>
-  <br>
-  <div class="d-grid gap-2">
-    <button type="button" class="btn btn-warning" routerLink="/carrental">Kirala</button>  
-  </div>
 </div>
-
+ 
+<app-car-rental></app-car-rental> 
+<br><br>
