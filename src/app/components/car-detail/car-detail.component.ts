@@ -11,15 +11,16 @@ import { CarImageService } from 'src/app/services/car-image.service';
   styleUrls: ['./car-detail.component.css'],
 })
 export class CarDetailComponent implements OnInit {
-  carDetails: CarDetailDto ;
+  carDetails: CarDetailDto;
   carImages: CarImage[] = [];
   imageBasePath = 'https://localhost:44379/';
   dataLoaded: boolean = false;
+  isCarAvail: boolean;
 
   constructor(
     private carDetailService: CarDetailService,
     private activatedRoute: ActivatedRoute,
-    private carImageService: CarImageService
+    private carImageService: CarImageService,
   ) {}
 
   ngOnInit(): void {
@@ -47,6 +48,13 @@ export class CarDetailComponent implements OnInit {
   }
 
   getImagePath(image: CarImage) {
-    return this.imageBasePath+ "Images/" + image.imagePath;
+    return this.imageBasePath + 'Images/' + image.imagePath;
   }
+
+  // isCarAvailable(carId: number) {
+  //   this.rentalService.isCarAvailable(carId).subscribe((response) => {
+  //     this.isCarAvail = response;
+  //     console.log(this.isCarAvailable);
+  //   });
+  // }
 }

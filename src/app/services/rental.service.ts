@@ -1,8 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { CarDetailDto } from '../models/carDetailDto';
 import { ListResponseModel } from '../models/listResponseModel';
+import { Rental } from '../models/rental';
 import { RentalDetailDto } from '../models/rentalDetailDto';
+import { ResponseModel } from '../models/responseModel';
 import { SingleResponseModel } from '../models/singleResponseModel';
 
 @Injectable({
@@ -18,20 +21,18 @@ export class RentalService {
     return this.httpClient.get<ListResponseModel<RentalDetailDto>>(newPath);
   }
 
-  getRentalsByCarId(
-    carId: number
-  ): Observable<SingleResponseModel<RentalDetailDto>> {
-    let newPath = this.apiUrl + 'rentals/getdetailbyid?id=' + carId;
+  getDetailById(id: number): Observable<SingleResponseModel<RentalDetailDto>> {
+    let newPath = this.apiUrl + 'rentals/getdetailbyid?id=' + id;
     return this.httpClient.get<SingleResponseModel<RentalDetailDto>>(newPath);
   }
 
-  addRental(
-    rental: RentalDetailDto
-  ): Observable<ListResponseModel<RentalDetailDto>> {
-    let newPath = this.apiUrl + 'rentals/getalldto';
-    return this.httpClient.post<ListResponseModel<RentalDetailDto>>(
-      newPath,
-      rental
-    );
+  isCarAvailable(carId:number):Observable<ResponseModel>{
+    let newPath=this.apiUrl+"rentals/iscaravailable?carId=" + carId;
+    return this.httpClient.get<ResponseModel>(newPath);
+  }
+
+  add(rental: Rental): Observable<ListResponseModel<CarDetailDto>> {
+    let newPath = this.apiUrl + 'rentals/add';
+    return this.httpClient.post<ListResponseModel<CarDetailDto>>(newPath, rental);
   }
 }

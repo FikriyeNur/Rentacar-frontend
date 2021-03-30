@@ -1,45 +1,71 @@
 <div class="continer">
-<h2 class="text-center">Araç Bilgileri</h2>
-<button type="button" class="btn btn-info" routerLink="/cars">
-  Araç Listesine Geri Dön</button
-><br /><br />
-<div *ngIf="dataLoaded == false" class="spinner-border text-info" role="status">
-  <span class="visually-hidden">Loading...</span>
-</div>
+  <h2 class="text-center">Araç Bilgileri</h2>
+  <button type="button" class="btn btn-info" routerLink="/cars">
+    Araç Listesine Geri Dön</button
+  ><br /><br />
+  <div
+    *ngIf="dataLoaded == false"
+    class="spinner-border text-info"
+    role="status"
+  >
+    <span class="visually-hidden">Loading...</span>
+  </div>
 
-<div class="card" style="width: 900px; height: 500px;" *ngFor="let image of carImages">
-  <img
-    [src]="getImagePath(image)"
-    class="card-img-top"
-    [alt]="getImagePath(image)"
+  <div
+    class="card"
     style="width: 900px; height: 500px"
-  />
-</div>
+    *ngFor="let image of carImages"
+  >
+    <img
+      [src]="getImagePath(image)"
+      class="card-img-top"
+      [alt]="getImagePath(image)"
+      style="width: 900px; height: 500px"
+    />
+  </div>
 
+  <br /><br />
+
+  <div class="col-md-6 offset-md-2">
+    <ul class="list-group list-group-flush">
+      <li
+        class="list-group-item list-group-item-warning"
+        style="text-align: center"
+      >
+        <h6>Marka : {{ carDetails.brandName }}</h6>
+      </li>
+      <li
+        class="list-group-item list-group-item-warning"
+        style="text-align: center"
+      >
+        <h6>Model : {{ carDetails.modelName }}</h6>
+      </li>
+      <li
+        class="list-group-item list-group-item-warning"
+        style="text-align: center"
+      >
+        <h6>Model Yılı : {{ carDetails.modelYear }}</h6>
+      </li>
+      <li
+        class="list-group-item list-group-item-warning"
+        style="text-align: center"
+      >
+        <h6>Renk : {{ carDetails.colorName }}</h6>
+      </li>
+      <li
+        class="list-group-item list-group-item-warning"
+        style="text-align: center"
+      >
+        <h6>Günlük Ücret : {{ carDetails.dailyPrice | currency: "₺" }}</h6>
+      </li>
+      <li
+        class="list-group-item list-group-item-warning"
+        style="text-align: center"
+      >
+        <h6>Araç Bilgileri : {{ carDetails.description }}</h6>
+      </li>
+    </ul>
+    <app-car-rental></app-car-rental>
+  </div>
+</div>
 <br /><br />
-
-<div class="col-md-6 offset-md-2">
-  <ul class="list-group">
-    <li class="list-group-item list-group-item-warning" style="text-align: center">
-      <h6>Marka : {{ carDetails.brandName }}</h6>
-    </li>
-    <li class="list-group-item list-group-item-warning" style="text-align: center">
-      <h6>Model : {{ carDetails.modelName }}</h6>
-    </li>
-    <li class="list-group-item list-group-item-warning" style="text-align: center">
-      <h6>Model Yılı : {{ carDetails.modelYear }}</h6>
-    </li>
-    <li class="list-group-item list-group-item-warning" style="text-align: center">
-      <h6>Renk : {{ carDetails.colorName }}</h6>
-    </li>
-    <li class="list-group-item list-group-item-warning" style="text-align: center">
-      <h6>Günlük Ücret : {{ carDetails.dailyPrice | currency:"₺" }}</h6>
-    </li>
-    <li class="list-group-item list-group-item-warning" style="text-align: center">
-      <h6>Araç Bilgileri : {{ carDetails.description }}</h6>
-    </li>
-  </ul>
-</div>
- 
-<app-car-rental></app-car-rental> 
-<br><br>

@@ -1,40 +1,42 @@
-import { formatDate } from '@angular/common';
+import { DatePipe, formatDate } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { CarDetailDto } from 'src/app/models/carDetailDto';
 import { CustomerDetailDto } from 'src/app/models/customerDetailDto';
 import { Rental } from 'src/app/models/rental';
-import { RentalDetailDto } from 'src/app/models/rentalDetailDto';
 import { CarDetailService } from 'src/app/services/car-detail.service';
 import { CustomerService } from 'src/app/services/customer.service';
-import { PaymentService } from 'src/app/services/payment.service';
 import { RentalService } from 'src/app/services/rental.service';
 
 @Component({
   selector: 'app-car-rental',
   templateUrl: './car-rental.component.html',
   styleUrls: ['./car-rental.component.css'],
+  providers: [DatePipe],
 })
 export class CarRentalComponent implements OnInit {
-  cars: CarDetailDto[];
   carDetail: CarDetailDto;
   customers: CustomerDetailDto[];
+  customer: CustomerDetailDto;
   customerId: number;
+
   rentDate: Date;
-  rentDateValue: Date;
   returnDate: Date;
-  isRentBefore: boolean = false;
-  rentalCar: RentalDetailDto;
+  minDate: string;
+  maxDate: string;
+  maxMinDate: string;
+  firstDateSelected: boolean = false;
+  isAvailable: boolean = false;
 
   constructor(
     private carDetailService: CarDetailService,
-    private activatedRoute: ActivatedRoute,
     private customerService: CustomerService,
+    private rentalService: RentalService,
     private toastrService: ToastrService,
-    private paymentService: PaymentService,
+    private activatedRoute: ActivatedRoute,
     private router: Router,
-    private rentalService: RentalService
+    private datePipe: DatePipe
   ) {}
 
   ngOnInit(): void {
@@ -42,7 +44,7 @@ export class CarRentalComponent implements OnInit {
       if (params['carId']) {
         this.getCarDetils(params['carId']);
         this.getCustomers();
-        this.getRentalByCarId(params['carId']);
+        this.checkAvailability(params['carId']);
       }
     });
   }
@@ -59,96 +61,50 @@ export class CarRentalComponent implements OnInit {
     });
   }
 
-  getRentalByCarId(carId: number) {
-    this.rentalService.getRentalsByCarId(carId).subscribe((response) => {
-      if (response.data == null) {
-        this.isRentBefore = false;
-      } else {
-        this.rentalCar = response.data;
-        this.isRentBefore = true;
-      }
-    });
-  }
-
   getMinRentDate() {
-    var now = new Date();
-    now.setDate(now.getDate() + 1);
-    return now.toISOString().slice(0, 10);
+    var today = new Date();
+    today.setDate(today.getDate());
+    return today.toISOString().slice(0, 10);
   }
 
   getMinReturnDate() {
-    var now = new Date();
-    now.setDate(now.getDate() + 2);
-    return now.toISOString().slice(0, 10);
+    var today = new Date();
+    today.setDate(today.getDate() + 1);
+    return today.toISOString().slice(0, 10);
   }
 
-  checkAvailability() {
-    if (!this.isRentBefore) {
-      return true;
-    } else {
-      return this.rentedCeforeCarCheck();
-    }
+  onChangeEvent(event: any) {
+    this.minDate = event.target.value;
+    this.firstDateSelected = true;
   }
 
-  rentedCeforeCarCheck() {
-    var now = new Date();
-    now.setHours(0, 0, 0, 0);
-    let today = formatDate(now, 'dd/MM/yyyy', 'tr');
-    let oldDate = formatDate(this.rentalCar.returnDate, 'dd/MM/yyyy', 'tr');
-
-    if (this.rentalCar.returnDate == null) {
-      return false;
-    } else if (oldDate > today) {
-      return false;
-    } else {
-      return true;
-    }
+  checkAvailability(carId: number) {
+    this.rentalService.isCarAvailable(carId).subscribe((response) => {
+      this.isAvailable = response.success;
+    });
   }
 
   createRental() {
-    let rental: Rental = {
-      carId: this.cars[0].carId,
-      customerId: parseInt(this.customerId.toString()),
-      rentDate: this.rentDate,
-      returnDate: this.returnDate ? this.returnDate : null,
-    };
-    this.paymentService.addToCart(rental);
-    console.log(this.paymentService.listCart());
-
-    this.router.navigate(['/payment']);
-    this.toastrService.info(
-      'Ödeme sayfasına yönlendiriliyorsunuz. Lütfen bekleyiniz.',
-      'Ödeme İşlemleri'
-    );
-  }
-
-  checkClick() {
-    if (this.checkAvailability() == true) {
-      if (this.rentDate == null || this.customerId == null) {
-        this.toastrService.warning(
-          'Araç kiralama tarihi ve müşteri seçiniz!',
-          'Hata'
-        );
-      } else {
-        if (this.returnDate == null || this.returnDate > this.rentDate) {
-          this.toastrService.success(
-            'Araç kiralama işlemi başarıyla gerçekleşti.',
-            'Araç Kiralama'
-          );
-          this.createRental();
-        } else if (this.returnDate < this.returnDate) {
-          this.toastrService.error(
-            'Araç teslim tarihi araç kiralama tarihinden küçük olamaz!',
-            'Hata'
-          );
-        } else if (this.returnDate == this.rentDate) {
-          this.toastrService.error(
-            'Aracı kiralama işlemi en az 1 gün olmalı!',
-            'Hata'
-          );
-        }
-      }
-    } else {
+    if (this.rentDate == null) {
+      this.toastrService.warning(
+        'Lütfen araç kiralama tarihi seçiniz!',
+        'Hata'
+      );
+    } else if (this.customerId == null) {
+      this.toastrService.warning('Lütfen müşteri seçiniz!', 'Hata');
+    } else if (this.rentDate > this.returnDate) {
+      this.toastrService.warning(
+        'Araç teslim tarihi araç kiralama tarihinden önce olamaz!',
+        'Hatalı Tarih'
+      );
+    } else if (this.isAvailable == true) {
+      this.toastrService.info(
+        'Ödeme sayfasına yönlendiriliyorsunuz. Lütfen bekleyiniz.',
+        'Ödeme İşlemleri'
+      );
+      let paymentUrl = '/payment/' + this.carDetail.carId;
+      this.router.navigate([paymentUrl]);
+    } else if (this.isAvailable == false) {
       this.toastrService.error(
         'Araç kiralama işlemi gerçekleştirilemedi!',
         'Araç Kullanımda'

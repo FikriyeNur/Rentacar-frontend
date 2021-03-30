@@ -27,11 +27,11 @@
         </option>
       </select>
     </div>
-    
+
     <div class="mb-3 row">
       <label class="col-4 col-form-label">Kiralama Tarihi</label>
       <input
-        [(ngModel)]="rentDateValue"
+        (change)="onChangeEvent($event)"
         class="form-control col-lg"
         type="date"
         min="{{ getMinRentDate() }}"
@@ -42,7 +42,7 @@
     <div class="mb-3 row">
       <label class="col-4 col-form-label">Araç Teslim Tarihi</label>
       <input
-        [(ngModel)]="rentDateValue"
+        disabled="{{ !firstDateSelected }}"
         class="form-control col-lg"
         type="date"
         min="{{ getMinReturnDate() }}"
@@ -54,18 +54,9 @@
       <button
         type="button"
         class="btn btn-warning mt-3"
-        *ngIf="checkAvailability() == true"
-        (clikc)="checkClick()"
+        (click)="createRental()"
       >
         Kirala
-      </button>
-      <button
-        type="button"
-        class="btn btn-danger mt-3"
-        *ngIf="checkAvailability() == false"
-        disabled
-      >
-        Araç Kullanımda
       </button>
     </div>
   </div>
