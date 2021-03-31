@@ -7,9 +7,8 @@
         <tr>
           <th scope="col">Marka</th>
           <th scope="col">Model</th>
-          <th scope="col">Model Yılı</th>
-          <th scope="col">Renk</th>
-          <th scope="col">Araç Bilgileri</th>
+          <th scope="col">Kiralama Tarihi</th>
+          <th scope="col">Teslim Tarihi</th>
           <th scope="col">Günlük Ücret</th>
           <th scope="col">Toplam Ücret</th>
         </tr>
@@ -18,12 +17,11 @@
         <tr>
           <th scope="row">{{ carDetail.brandName }}</th>
           <th>{{ carDetail.modelName }}</th>
-          <th>{{ carDetail.modelYear }}</th>
-          <th>{{ carDetail.colorName }}</th>
-          <th>{{ carDetail.description }}</th>
+          <th>{{ rental.rentDate | date: "dd/MM/yyyy" }}</th>
+          <th>{{ rental.returnDate | date: "dd/MM/yyyy" }}</th>
           <th>{{ carDetail.dailyPrice }}</th>
           <th style="color: cornflowerblue; font-weight: bold">
-            {{ totalRentPrice !== 0 }}
+            {{ paymentAmount | currency: "t" }}
           </th>
         </tr>
       </tbody>
@@ -34,61 +32,114 @@
 <br /><br />
 
 <div class="card">
-  <h4 class="card-header">Kredi Kartı İle Ödeme</h4>
-  <div class="card-body">
-    <div class="row gy-3">
-      <div class="col-md-3">
-        <label for="inputNameOnCard" class="form-label"
-          >Kart Üzerindeki İsim</label
-        >
-        <input
-          type="text"
-          class="form-control"
-          id="inputNameOnCard"
-          placeholder="Kart sahibinin adı ve soyadı"
-        />
-      </div>
-      <br /><br />
-
-      <div class="col-md-3">
-        <label for="inputCardNumber" class="form-label">Kart Numarası</label>
-        <input
-          type="text"
-          class="form-control"
-          id="inputCardNumber"
-          placeholder=" ••••   ••••   ••••   ••••"
-        />
-      </div>
-
-      <div class="col-md-2">
-        <label for="inputCardExpiration" class="form-label"
-          >Son Kullanma Tarihi</label
-        >
-        <input
-          type="text"
-          class="form-control"
-          id="inputCardExpiration"
-          placeholder="Ay / Yıl"
-        />
-      </div>
-
-      <div class="col-md-2">
-        <label for="inputCVV" class="form-label">Güvenlik Kodu</label>
-        <input
-          type="text"
-          class="form-control"
-          id="inputCVV"
-          placeholder="CVC / CVV"
-        />
-      </div>
-
-      <div class="d-grid gap-3">
-        <button class="btn btn-success mt-3" type="button">
-          Ödemeyi Gerçekleştir
-        </button>
-        <button class="btn btn-warning mt-3" type="button" routerLink="/cars">
-          İşlemi İptal Et
-        </button>
+  <div>
+    <div class="card-header">
+      <h4 class="text-center">Kredi Kartı İle Ödeme</h4>
+    </div>
+    <div class="card-body">
+      <form [formGroup]="paymentForm">
+        <div class="col-md-4">
+          <div class="mb-3">
+            <label for="nameOnCard">Kartın Üzerindeki İsim ve Soyisim</label>
+            <div class="form-group">
+              <input
+                type="text"
+                class="form-control"
+                id="nameOnCard"
+                formControlName="nameOnCard"
+                placeholder="Kart sahibinin adı ve soyadı"
+                [(ngModel)]="cardName"
+              />
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="mb-3">
+            <label for="cardNumber">Card number</label>
+            <div class="form-group">
+              <input
+                type="text"
+                class="form-control"
+                id="cardNumber"
+                formControlName="cardNumber"
+                placeholder=" ••••   ••••   ••••   ••••"
+                [(ngModel)]="cardNumber"
+              />
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-3">
+            <label for="expirationDate">Son Kullanma Tarihi</label>
+            <div class="row" id="expirationDate">
+              <div class="col-md-5">
+                <div class="mb-3">
+                  <div class="form-group">
+                    <input
+                      type="number"
+                      class="form-control"
+                      formControlName="expirationDateMonth"
+                      placeholder="Ay"
+                      max="12"
+                      min="1"
+                      [(ngModel)]="expirationDateMonth"
+                      (input)="dateControl()"
+                    />
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-2">
+                <h3 class="text-center">/</h3>
+              </div>
+              <div class="col-md-5">
+                <div class="mb-3">
+                  <div class="form-group">
+                    <input
+                      type="number"
+                      class="form-control"
+                      formControlName="expirationDateYear"
+                      placeholder="Yıl"
+                      max="2100"
+                      min="{{ getMinYear() }}"
+                      [(ngModel)]="expirationDateYear"
+                      (input)="dateControl()"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-2">
+            <div class="mb-3">
+              <div class="form-group">
+                <label for="securityCode">Güvenlik Kodu</label>
+                <input
+                  id="securityCode"
+                  type="text"
+                  maxlength="3"
+                  minlength="3"
+                  class="form-control"
+                  formControlName="securityCode"
+                  placeholder="CVC/CVV"
+                  [(ngModel)]="cardCvv"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+      <div class="row">
+        <div class="col-md-6" style="text-align: end">
+          <button (click)="createPayment()" class="btn btn-success">
+            <strong>{{ paymentAmount | currency: '₺' }}</strong>
+            Ödemeyi Gerçekleştir
+          </button>
+        </div>
+        <div class="col-md-6" style="text-align: start">
+          <button class="btn btn-fill btn-warning" (click)="cancelButton()">
+            İşlemi İptal Et
+          </button>
+        </div>
       </div>
     </div>
   </div>

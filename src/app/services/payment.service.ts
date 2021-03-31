@@ -1,37 +1,38 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { CartItem } from '../models/cartItem';
-import { CartItems } from '../models/cartItems';
 import { ListResponseModel } from '../models/listResponseModel';
 import { Payment } from '../models/payment';
+import { PaymentDetalDto } from '../models/paymentDetailDto';
 import { Rental } from '../models/rental';
 import { ResponseModel } from '../models/responseModel';
+import { SingleResponseModel } from '../models/singleResponseModel';
 
 @Injectable({
   providedIn: 'root',
 })
 export class PaymentService {
+  
   apiUrl = 'https://localhost:44379/api/payments/';
-  constructor(private httpCilent: HttpClient) {}
+  constructor(private httpClient: HttpClient) {}
 
   getPayment(): Observable<ListResponseModel<Payment>> {
     let newPath = this.apiUrl + 'getall';
-    return this.httpCilent.get<ListResponseModel<Payment>>(newPath);
+    return this.httpClient.get<ListResponseModel<Payment>>(newPath);
   }
 
-  addPayment(payment: Payment) {
+  getPaymentDetailDto(): Observable<ListResponseModel<PaymentDetalDto>> {
+    let newPath = this.apiUrl + 'getalldto';
+    return this.httpClient.get<ListResponseModel<PaymentDetalDto>>(newPath);
+  }
+
+  getPaymentByIdDto(paymentId: number) {
+    let newPath = this.apiUrl + 'getbyiddto?paymentId=' + paymentId;
+    return this.httpClient.get<SingleResponseModel<PaymentDetalDto>>(newPath);
+  }
+
+  addPayment(payment: Payment): Observable<ResponseModel> {
     let newPath = this.apiUrl + 'add';
-    return this.httpCilent.post<ResponseModel>(newPath, payment);
-  }
-
-  addToCart(rental: Rental) {
-    let cartItem = new CartItem();
-    cartItem.rental = rental;
-    CartItems.push(cartItem);
-  }
-
-  listCart(): CartItem[] {
-    return CartItems;
+    return this.httpClient.post<ResponseModel>(newPath, payment);
   }
 }

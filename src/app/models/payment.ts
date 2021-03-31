@@ -1,7 +1,11 @@
 export interface Payment {
-  id?: number;
-  userId: number;
-  carId: number;
-  processDate?: Date;
-  totalAmount: number;
+  paymentId?: number;
+  rentalId?: number;
+  userId?: number;
+  carNameSurname: string;
+  cardNumber: string;
+  cardExpirationDateMonth: number;
+  cardExpirationDateYear: number;
+  cardCvv: string;
+  cardLimit:number;
 }

@@ -3,19 +3,6 @@
   <h4 class="card-header">Aracı Kirala</h4>
   <div class="card-body">
     <div class="mb-3 row">
-      <label class="col-4 col-form-label">Ücret</label>
-      <div class="col-lg">
-        <input
-          class="form-control col-lg"
-          type="text"
-          placeholder="{{ carDetail.dailyPrice | currency: '₺' }}"
-          aria-label="Disabled input example"
-          disabled
-        />
-      </div>
-    </div>
-
-    <div class="mb-3 row">
       <label class="col-4 col-form-label">Müşteriler</label>
       <select class="form-select col-lg" [(ngModel)]="customerId">
         <option
@@ -50,13 +37,44 @@
         [(ngModel)]="returnDate"
       />
     </div>
+
+    <div class="mb-3 row">
+      <label class="col-4 col-form-label">Ücret</label>
+      <div class="col-lg">
+        <input
+          class="form-control col-lg"
+          type="text"
+          placeholder="{{ carDetail.dailyPrice | currency: '₺' }}"
+          aria-label="Disabled input example"
+          disabled
+        />
+      </div>
+    </div>
+
+    <div class="mb-3 row" *ngIf="returnDate">
+      <label class="col-4 col-form-label">Toplam Ücret</label>
+      <div class="col-lg">
+        <input
+          class="form-control col-lg"
+          type="text"
+          placeholder="{{ paymentAmount | currency: '₺' }}"
+          aria-label="Disabled input example"
+          disabled
+        />
+      </div>
+    </div>
+
     <div class="d-grid gap-2">
       <button
+        *ngIf="isAvailable"
         type="button"
         class="btn btn-warning mt-3"
         (click)="createRental()"
       >
         Kirala
+      </button>
+      <button *ngIf="!isAvailable" type="button" class="btn btn-danger mt-3">
+        Araç kullanımda olduğu için kiralayamazsınız!
       </button>
     </div>
   </div>

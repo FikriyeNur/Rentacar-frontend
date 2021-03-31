@@ -3,6 +3,5 @@ export interface CustomerDetailDto {
   companyName: string;
   userFirstName: string;
   userLastName: string;
-  eMail:string;
-  
+  eMail:string; 
 }
