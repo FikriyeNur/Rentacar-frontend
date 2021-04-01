@@ -24,10 +24,10 @@ export class CarRentalComponent implements OnInit {
   minDate: string;
   maxDate: string;
   maxMinDate: string;
-  firstDateSelected: boolean = false;
-  isAvailable: boolean = false;
   paymentAmount: number;
   rentDay: number;
+  firstDateSelected: boolean = false;
+  isAvailable: boolean = false;
 
   constructor(
     private carDetailService: CarDetailService,
@@ -35,7 +35,7 @@ export class CarRentalComponent implements OnInit {
     private rentalService: RentalService,
     private toastrService: ToastrService,
     private activatedRoute: ActivatedRoute,
-    private router: Router,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -77,6 +77,11 @@ export class CarRentalComponent implements OnInit {
     this.firstDateSelected = true;
   }
 
+  rentEndChangeEvent(event: any) {
+    this.returnDate = event.target.value;
+    this.totalAmount();
+  }
+
   checkAvailability(carId: number) {
     this.rentalService.isCarAvailable(carId).subscribe((response) => {
       this.isAvailable = response.success;
@@ -92,6 +97,7 @@ export class CarRentalComponent implements OnInit {
       rentDate: this.rentDate,
       returnDate: this.returnDate,
       customerId: this.customerId,
+      totalPrice: this.paymentAmount,
     };
 
     if (this.rentDate == null) {
@@ -123,14 +129,14 @@ export class CarRentalComponent implements OnInit {
   }
 
   totalAmount() {
-    if (this.returnDate != null) {
+    if (this.rentDate != null && this.returnDate != null) {
       var returnDate = new Date(this.returnDate.toString());
       var rentDate = new Date(this.rentDate.toString());
       var difference = returnDate.getTime() - rentDate.getTime();
 
-      var rentDays = Math.ceil(difference / (1000 * 3600 * 24));
+      this.rentDay = Math.ceil(difference / (1000 * 3600 * 24));
 
-      this.paymentAmount = rentDays * this.carDetail.dailyPrice;
+      this.paymentAmount = this.rentDay * this.carDetail.dailyPrice;
     }
   }
 }

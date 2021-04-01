@@ -7,7 +7,8 @@ import { CarDetailDto } from '../models/carDetailDto';
 export class FilterColorPipe implements PipeTransform {
   transform(value: CarDetailDto[], filterText: string): CarDetailDto[] {
     filterText = filterText ? filterText.toLocaleLowerCase() : null;
-    return filterText? value.filter(
+    return filterText
+      ? value.filter(
           (c: CarDetailDto) =>
             c.colorName.toLocaleLowerCase().indexOf(filterText) !== -1
         )

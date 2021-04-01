@@ -30,7 +30,7 @@ export class PaymentService {
     return this.httpClient.get<SingleResponseModel<PaymentDetalDto>>(newPath);
   }
 
-  addPayment(payment: Payment): Observable<ResponseModel> {
+  add(payment: Payment): Observable<ResponseModel> {
     let newPath = this.apiUrl + 'add';
     return this.httpClient.post<ResponseModel>(newPath, payment);
   }

@@ -29,6 +29,7 @@
     <div class="mb-3 row">
       <label class="col-4 col-form-label">Araç Teslim Tarihi</label>
       <input
+        (change)="rentEndChangeEvent($event)"
         disabled="{{ !firstDateSelected }}"
         class="form-control col-lg"
         type="date"

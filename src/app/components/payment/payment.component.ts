@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { CarDetailDto } from 'src/app/models/carDetailDto';
 import { Payment } from 'src/app/models/payment';
-import { Rental } from 'src/app/models/rental';
+import { RentalDetailDto } from 'src/app/models/rentalDetailDto';
 import { CarDetailService } from 'src/app/services/car-detail.service';
 import { PaymentService } from 'src/app/services/payment.service';
 
@@ -15,7 +15,7 @@ import { PaymentService } from 'src/app/services/payment.service';
 })
 export class PaymentComponent implements OnInit {
   carDetail: CarDetailDto;
-  rental: Rental;
+  rental: RentalDetailDto;
   payment: Payment;
   customerId: number;
 
@@ -43,6 +43,7 @@ export class PaymentComponent implements OnInit {
         this.rental = JSON.parse(params['rental']);
         this.customerId = JSON.parse(params['rental']).customerId;
         this.getCarDetails(this.rental.carId);
+        this.paymentAmount = JSON.parse(params["rental"]).totalPrice;
       }
     });
   }
@@ -74,7 +75,7 @@ export class PaymentComponent implements OnInit {
         cardCvv: this.cardCvv,
       };
 
-      this.paymentService.addPayment(this.payment).subscribe((response) => {
+      this.paymentService.add(this.payment).subscribe((response) => {
         if ((this.successPayment = response.success)) {
           this.toastrService.success(
             'Ödeme işlemi başarıyla gerçekleşti.',
@@ -89,25 +90,6 @@ export class PaymentComponent implements OnInit {
           this.router.navigate(['/cars']);
         }
       });
-    }
-  }
-
-  totalAmount() {
-    if (this.rental.returnDate != null) {
-      var rentDate = new Date(this.rental.rentDate.toString());
-      var returnDate = new Date(this.rental.returnDate.toString());
-      var differenceDay = returnDate.getTime() - rentDate.getTime();
-
-      var rentDay = Math.ceil(differenceDay / (1000 * 3600 * 24));
-      this.paymentAmount = this.carDetail.dailyPrice * rentDay;
-
-      if (this.paymentAmount <= 0) {
-        this.router.navigate(['/cars']);
-        this.toastrService.error(
-          'Ana sayfaya yönlendiriliyorsunuz',
-          'Hatalı işlem'
-        );
-      }
     }
   }
 
