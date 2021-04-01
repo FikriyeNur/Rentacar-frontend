@@ -1,27 +1,11 @@
-# Rentacar
+![1](https://user-images.githubusercontent.com/77406487/113275007-f9710880-92e6-11eb-9700-813c9c81592b.png)
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.2.3.
+![2](https://user-images.githubusercontent.com/77406487/113275046-055cca80-92e7-11eb-983c-10b6cce5912d.png)
 
-## Development server
+![3](https://user-images.githubusercontent.com/77406487/113275063-0a217e80-92e7-11eb-9270-4ec07cc79641.png)
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+![4](https://user-images.githubusercontent.com/77406487/113275066-0beb4200-92e7-11eb-81a0-da26993ae1c5.png)
 
-## Code scaffolding
+![5](https://user-images.githubusercontent.com/77406487/113275073-0d1c6f00-92e7-11eb-9c42-4f48a518ba06.png)
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+![6](https://user-images.githubusercontent.com/77406487/113275076-0e4d9c00-92e7-11eb-9e25-005a99cbbfc0.png)
