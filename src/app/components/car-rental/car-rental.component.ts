@@ -1,4 +1,3 @@
-import { DatePipe, formatDate } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
@@ -13,7 +12,6 @@ import { RentalService } from 'src/app/services/rental.service';
   selector: 'app-car-rental',
   templateUrl: './car-rental.component.html',
   styleUrls: ['./car-rental.component.css'],
-  providers: [DatePipe],
 })
 export class CarRentalComponent implements OnInit {
   carDetail: CarDetailDto;
@@ -37,7 +35,7 @@ export class CarRentalComponent implements OnInit {
     private rentalService: RentalService,
     private toastrService: ToastrService,
     private activatedRoute: ActivatedRoute,
-    private router: Router
+    private router: Router,
   ) {}
 
   ngOnInit(): void {

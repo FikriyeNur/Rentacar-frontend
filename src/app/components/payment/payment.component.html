@@ -4,7 +4,7 @@
   <div class="card-body">
     <table class="table">
       <thead>
-        <tr>
+        <tr>  
           <th scope="col">Marka</th>
           <th scope="col">Model</th>
           <th scope="col">Kiralama Tarihi</th>
@@ -71,7 +71,7 @@
         <div class="row">
           <div class="col-md-3">
             <label for="expirationDate">Son Kullanma Tarihi</label>
-            <div class="row" id="expirationDate">
+            <div class="row">
               <div class="col-md-5">
                 <div class="mb-3">
                   <div class="form-group">
@@ -112,14 +112,14 @@
           <div class="col-md-2">
             <div class="mb-3">
               <div class="form-group">
-                <label for="securityCode">Güvenlik Kodu</label>
+                <label>Güvenlik Kodu</label>
                 <input
-                  id="securityCode"
+                  id="cvv"
                   type="text"
                   maxlength="3"
                   minlength="3"
                   class="form-control"
-                  formControlName="securityCode"
+                  formControlName="cvv"
                   placeholder="CVC/CVV"
                   [(ngModel)]="cardCvv"
                 />
@@ -131,7 +131,6 @@
       <div class="row">
         <div class="col-md-6" style="text-align: end">
           <button (click)="createPayment()" class="btn btn-success">
-            <strong>{{ paymentAmount | currency: '₺' }}</strong>
             Ödemeyi Gerçekleştir
           </button>
         </div>

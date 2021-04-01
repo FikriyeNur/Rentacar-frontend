@@ -12,7 +12,6 @@ import { SingleResponseModel } from '../models/singleResponseModel';
   providedIn: 'root',
 })
 export class PaymentService {
-  
   apiUrl = 'https://localhost:44379/api/payments/';
   constructor(private httpClient: HttpClient) {}
 

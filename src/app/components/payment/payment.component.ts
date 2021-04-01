@@ -3,13 +3,10 @@ import { FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { CarDetailDto } from 'src/app/models/carDetailDto';
-import { CustomerDetailDto } from 'src/app/models/customerDetailDto';
 import { Payment } from 'src/app/models/payment';
 import { Rental } from 'src/app/models/rental';
 import { CarDetailService } from 'src/app/services/car-detail.service';
-import { CustomerService } from 'src/app/services/customer.service';
 import { PaymentService } from 'src/app/services/payment.service';
-import { RentalService } from 'src/app/services/rental.service';
 
 @Component({
   selector: 'app-payment',
@@ -18,13 +15,9 @@ import { RentalService } from 'src/app/services/rental.service';
 })
 export class PaymentComponent implements OnInit {
   carDetail: CarDetailDto;
-  customer: CustomerDetailDto;
-  rental: Rental = this.rentalService.rental;
+  rental: Rental;
   payment: Payment;
-
-  rentDay: number;
   customerId: number;
-  expirationDate: string;
 
   cardName: string;
   cardNumber: string;
@@ -33,12 +26,11 @@ export class PaymentComponent implements OnInit {
   cardDate: string;
   cardCvv: string;
   paymentAmount: number = 0;
+  successPayment: boolean = false;
 
   paymentForm: FormGroup;
   constructor(
     private carDetailService: CarDetailService,
-    private customerService: CustomerService,
-    private rentalService: RentalService,
     private paymentService: PaymentService,
     private activatedRoute: ActivatedRoute,
     private router: Router,
@@ -50,7 +42,6 @@ export class PaymentComponent implements OnInit {
       if (params['rental']) {
         this.rental = JSON.parse(params['rental']);
         this.customerId = JSON.parse(params['rental']).customerId;
-        this.getCustomerById(this.customerId);
         this.getCarDetails(this.rental.carId);
       }
     });
@@ -62,28 +53,17 @@ export class PaymentComponent implements OnInit {
     });
   }
 
-  getCustomerById(customerId: number) {
-    this.customerService.getCustomerById(customerId).subscribe((response) => {
-      this.customer = response.data;
-    });
-  }
-
   createPayment() {
-    if (this.cardName === undefined || !this.cardName) {
+    if (this.cardName == null) {
       this.toastrService.warning('Kart Sahibi bilgisini kontrol ediniz.');
-    } else if (this.cardNumber === undefined || !this.cardNumber) {
+    } else if (this.cardNumber == null) {
       this.toastrService.warning('Kart Numarası bilgisini kontrol ediniz.');
     } else if (
-      this.expirationDateMonth === undefined ||
-      !this.expirationDateMonth
+      this.expirationDateMonth == null ||
+      this.expirationDateYear == null
     ) {
       this.toastrService.warning('Tarih Ay bilgisini kontrol ediniz.');
-    } else if (
-      this.expirationDateYear === undefined ||
-      !this.expirationDateYear
-    ) {
-      this.toastrService.warning('Tarih Yıl bilgisini kontrol ediniz.');
-    } else if (this.cardCvv === undefined || !this.cardCvv) {
+    } else if (this.cardCvv == null) {
       this.toastrService.warning('CVV bilgisini kontrol ediniz.');
     } else {
       this.payment = {
@@ -92,25 +72,24 @@ export class PaymentComponent implements OnInit {
         cardExpirationDateMonth: this.expirationDateMonth,
         cardExpirationDateYear: this.expirationDateYear,
         cardCvv: this.cardCvv,
-        cardLimit: this.paymentAmount,
       };
-    }
 
-    this.paymentService.addPayment(this.payment).subscribe((response) => {
-      this.toastrService.success(
-        'Ödeme işlemi başarıyla gerçekleşti.',
-        'Ödeme Başarılı'
-      );
-      console.log(this.rental);
-
-      this.rentalService.add(this.rental).subscribe((response) => {
-        this.toastrService.success(
-          response.messages.toString(),
-          'Kiralama Başarılı'
-        );
-        this.router.navigate(['/rentals']);
+      this.paymentService.addPayment(this.payment).subscribe((response) => {
+        if ((this.successPayment = response.success)) {
+          this.toastrService.success(
+            'Ödeme işlemi başarıyla gerçekleşti.',
+            'Ödeme Başarılı'
+          );
+          this.router.navigate(['/rentals']);
+        } else {
+          this.toastrService.error(
+            'Ödeme işlemi gerçekleştirilemedi',
+            'Ödeme Başarısız'
+          );
+          this.router.navigate(['/cars']);
+        }
       });
-    });
+    }
   }
 
   totalAmount() {
@@ -119,8 +98,8 @@ export class PaymentComponent implements OnInit {
       var returnDate = new Date(this.rental.returnDate.toString());
       var differenceDay = returnDate.getTime() - rentDate.getTime();
 
-      this.rentDay = Math.ceil(differenceDay / (1000 * 3600 * 24));
-      this.paymentAmount = this.carDetail.dailyPrice * this.rentDay;
+      var rentDay = Math.ceil(differenceDay / (1000 * 3600 * 24));
+      this.paymentAmount = this.carDetail.dailyPrice * rentDay;
 
       if (this.paymentAmount <= 0) {
         this.router.navigate(['/cars']);
@@ -135,11 +114,7 @@ export class PaymentComponent implements OnInit {
   dateControl() {
     var year = new Date().getFullYear();
     var month = new Date().getMonth() + 1;
-    if (
-      (this.expirationDateYear <= year && this.expirationDateMonth < month) ||
-      !this.expirationDateYear ||
-      !this.expirationDateMonth
-    ) {
+    if (this.expirationDateYear <= year && this.expirationDateMonth < month) {
       this.toastrService.warning(
         'Son kullanma tarihini kontrol ediniz.',
         'Dikkat'
