@@ -11,7 +11,7 @@ import { CarDetailDto } from 'src/app/models/carDetailDto';
 import { CreditCard } from 'src/app/models/creditCard';
 import { CustomerDetailDto } from 'src/app/models/customerDetailDto';
 import { Rental } from 'src/app/models/rental';
-import { CarDetailService } from 'src/app/services/car-detail.service';
+import { CarService } from 'src/app/services/car.service';
 import { CustomerService } from 'src/app/services/customer.service';
 import { PaymentService } from 'src/app/services/payment.service';
 import { RentalService } from 'src/app/services/rental.service';
@@ -40,7 +40,7 @@ export class PaymentComponent implements OnInit {
   successPayment: boolean = false;
 
   constructor(
-    private carDetailService: CarDetailService,
+    private carService: CarService,
     private rentalService: RentalService,
     private paymentService: PaymentService,
     private activatedRoute: ActivatedRoute,
@@ -61,7 +61,7 @@ export class PaymentComponent implements OnInit {
   }
 
   getCarDetails(carId: number) {
-    this.carDetailService.getCarDetails(carId).subscribe((response) => {
+    this.carService.getCarDetails(carId).subscribe((response) => {
       this.carDetail = response.data;
     });
   }

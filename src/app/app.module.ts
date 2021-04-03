@@ -22,6 +22,8 @@ import { CarRentalComponent } from './components/car-rental/car-rental.component
 import { PaymentComponent } from './components/payment/payment.component';
 import { CarAddComponent } from './components/car-add/car-add.component';
 import { CarListComponent } from './components/car-list/car-list.component';
+import { CarUpdateComponent } from './components/car-update/car-update.component';
+import { CarDeleteComponent } from './components/car-delete/car-delete.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +43,8 @@ import { CarListComponent } from './components/car-list/car-list.component';
     PaymentComponent,
     CarAddComponent,
     CarListComponent,
+    CarUpdateComponent,
+    CarDeleteComponent,
   ],
   imports: [
     BrowserModule,

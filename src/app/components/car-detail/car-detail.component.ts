@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CarDetailDto } from 'src/app/models/carDetailDto';
 import { CarImage } from 'src/app/models/carImage';
-import { CarDetailService } from 'src/app/services/car-detail.service';
 import { CarImageService } from 'src/app/services/car-image.service';
+import { CarService } from 'src/app/services/car.service';
 
 @Component({
   selector: 'app-car-detail',
@@ -18,7 +18,7 @@ export class CarDetailComponent implements OnInit {
   isCarAvail: boolean;
 
   constructor(
-    private carDetailService: CarDetailService,
+    private carService: CarService,
     private activatedRoute: ActivatedRoute,
     private carImageService: CarImageService,
   ) {}
@@ -33,7 +33,7 @@ export class CarDetailComponent implements OnInit {
   }
 
   getCarDetails(carId: number) {
-    this.carDetailService.getCarDetails(carId).subscribe((response) => {
+    this.carService.getCarDetails(carId).subscribe((response) => {
       this.carDetails = response.data;
       console.log(this.carDetails);
       this.dataLoaded = true;

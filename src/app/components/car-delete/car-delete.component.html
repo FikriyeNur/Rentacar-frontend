@@ -3,34 +3,33 @@
   <div class="col-md-12" style="display: inline-block">
     <div class="card">
       <div class="card-header">
-        <h5 class="title text-center">Araba Ekle</h5>
+        <h5 class="title text-center">Aracı Sil</h5>
       </div>
       <div class="card-body">
-        <form [formGroup]="carAddForm">
+        <form [formGroup]="carDeleteForm">
+          <div class="mb-3">
+            <label for="carId">Araç Id</label>
+            <div class="form-group">
+              <input
+                type="number"
+                id="carId"
+                formControlName="carId"
+                class="form-control"
+                placeholder="Marka Id giriniz.."
+              />
+            </div>
+          </div>
+          
           <div class="mb-3">
             <label for="brandId">Marka Id</label>
             <div class="form-group">
               <input
-              type="number"
-              id="brandId"
-              formControlName="brandId"
-              class="form-control"
-              placeholder="Marka Id giriniz.."
-            />
-              <!-- <select
-                class="form-select"
+                type="number"
                 id="brandId"
                 formControlName="brandId"
-              >
-                <option
-                  class="form-select mb-3"
-                  *ngFor="let brand of brands"
-                  value="{{ brand.brandId }}"
-                  [selected]="getSelectedBrand(brand.brandId)"
-                >
-                  {{ brand.brandName }}
-                </option>
-              </select> -->
+                class="form-control"
+                placeholder="Marka Id giriniz.."
+              />
             </div>
           </div>
 
@@ -38,26 +37,12 @@
             <label for="modelId">Model Id</label>
             <div class="form-group">
               <input
-              type="number"
-              id="modelId"
-              formControlName="modelId"
-              class="form-control"
-              placeholder="Model Id giriniz.."
-            />
-              <!-- <select
-                class="form-select"
+                type="number"
                 id="modelId"
                 formControlName="modelId"
-              >
-                <option
-                  class="form-select mb-3"
-                  *ngFor="let model of models"
-                  value="{{ model.modelId }}"
-                  [selected]="getSelectedModel(model.modelId)"
-                >
-                  {{ model.modelName }}
-                </option>
-              </select> -->
+                class="form-control"
+                placeholder="Model Id giriniz.."
+              />
             </div>
           </div>
 
@@ -71,20 +56,6 @@
                 class="form-control"
                 placeholder="Renk Id giriniz.."
               />
-              <!-- <select
-                class="form-select"
-                id="colorId"
-                formControlName="colorId"
-              >
-                <option
-                  class="form-select mb-3"
-                  *ngFor="let color of colors"
-                  value="{{ color.colorId }}"
-                  [selected]="getSelectedColor(color.colorId)"
-                >
-                  {{ color.colorName }}
-                </option>
-              </select> -->
             </div>
           </div>
 
@@ -129,8 +100,17 @@
         </form>
       </div>
       <div class="card-footer">
-        <div class="d-grid gap-2 col-4 mx-auto">
-          <button class="btn btn-success" (click)="addCar()">Ekle</button>
+        <div class="row">
+          <div class="col-md-6" style="text-align: end">
+            <button (click)="deleteCar()" class="btn btn-danger">
+           Aracı   Sil
+            </button>
+          </div>
+          <div class="col-md-6" style="text-align: start">
+            <button class="btn btn-fill btn-info" routerLink="/car/list">
+             Araç Listesine Dön
+            </button>
+          </div>
         </div>
       </div>
     </div>

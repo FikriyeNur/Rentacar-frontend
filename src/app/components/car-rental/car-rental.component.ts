@@ -4,7 +4,7 @@ import { ToastrService } from 'ngx-toastr';
 import { CarDetailDto } from 'src/app/models/carDetailDto';
 import { CustomerDetailDto } from 'src/app/models/customerDetailDto';
 import { RentalDetailDto } from 'src/app/models/rentalDetailDto';
-import { CarDetailService } from 'src/app/services/car-detail.service';
+import { CarService } from 'src/app/services/car.service';
 import { CustomerService } from 'src/app/services/customer.service';
 import { RentalService } from 'src/app/services/rental.service';
 
@@ -31,7 +31,7 @@ export class CarRentalComponent implements OnInit {
   isAvailable: boolean = false;
 
   constructor(
-    private carDetailService: CarDetailService,
+    private carService: CarService,
     private customerService: CustomerService,
     private rentalService: RentalService,
     private toastrService: ToastrService,
@@ -50,7 +50,7 @@ export class CarRentalComponent implements OnInit {
   }
 
   getCarDetils(carId: number) {
-    this.carDetailService.getCarDetails(carId).subscribe((response) => {
+    this.carService.getCarDetails(carId).subscribe((response) => {
       this.carDetail = response.data;
     });
   }

@@ -1,5 +1,7 @@
 <br />
-<button type="button" class="btn btn-info" routerLink="/cars/add">Araç Ekle</button>
+<button type="button" class="btn btn-info" routerLink="/car/add">
+  Araç Ekle
+</button>
 <br /><br />
 <table class="table">
   <thead>
@@ -22,8 +24,16 @@
       <td>{{ cars.colorName }}</td>
       <td>{{ cars.dailyPrice }}</td>
       <td>{{ cars.description }}</td>
-      <td><button type="button" class="btn btn-success">Bilgileri Güncelle</button></td>
-      <td><button type="button" class="btn btn-danger">Aracı Sil</button></td>
+      <td>
+        <button type="button" class="btn btn-success" routerLink="/car/update/{{cars.carId}}">
+          Bilgileri Güncelle
+        </button>
+      </td>
+      <td>
+        <button type="button" class="btn btn-danger" routerLink="/car/delete/{{cars.carId}}">
+          Aracı Sil
+        </button>
+      </td>
     </tr>
   </tbody>
 </table>
