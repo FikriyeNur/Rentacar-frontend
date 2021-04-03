@@ -1,11 +1,10 @@
-import { Rental } from "./rental";
+import { Rental } from './rental';
 
-export interface RentalDetailDto extends Rental{
-    companyName?:string;
-    userFirstName?:string;
-    userLastName?:string;
-    brandName:string;
-    modelName:string;
-    dailyPrice:number; 
-    totalPrice?:number;
+export interface RentalDetailDto extends Rental {
+  companyName?: string;
+  nameSurname?:string;
+  brandName: string;
+  modelName: string;
+  dailyPrice: number;
+  totalPrice: number;
 }

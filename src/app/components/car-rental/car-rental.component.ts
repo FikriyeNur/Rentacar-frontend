@@ -18,6 +18,8 @@ export class CarRentalComponent implements OnInit {
   customers: CustomerDetailDto[];
   customer: CustomerDetailDto;
   customerId: number;
+  customerName: string;
+  customerSurname: string;
 
   rentDate: Date;
   returnDate: Date;
@@ -25,7 +27,6 @@ export class CarRentalComponent implements OnInit {
   maxDate: string;
   maxMinDate: string;
   paymentAmount: number;
-  rentDay: number;
   firstDateSelected: boolean = false;
   isAvailable: boolean = false;
 
@@ -88,6 +89,18 @@ export class CarRentalComponent implements OnInit {
     });
   }
 
+  totalAmount() {
+    if (this.rentDate != null && this.returnDate != null) {
+      var returnDate = new Date(this.returnDate.toString());
+      var rentDate = new Date(this.rentDate.toString());
+      var difference = returnDate.getTime() - rentDate.getTime();
+
+      var rentDay = Math.ceil(difference / (1000 * 3600 * 24));
+
+      this.paymentAmount = rentDay * this.carDetail.dailyPrice;
+    }
+  }
+
   createRental() {
     let createdRental: RentalDetailDto = {
       carId: this.carDetail.carId,
@@ -114,29 +127,18 @@ export class CarRentalComponent implements OnInit {
         'Araç teslim tarihi araç kiralama tarihinden önce olamaz!',
         'Hatalı Tarih'
       );
-    } else if (this.isAvailable == true) {
+    }else if (this.rentDate == this.returnDate) {
+      this.toastrService.warning(
+        'Araç kiralama işlemi en az 1 gün olamalı!',
+        'Hatalı Tarih'
+      );
+    } 
+    else if (this.isAvailable == true) {
       this.toastrService.info(
         'Ödeme sayfasına yönlendiriliyorsunuz. Lütfen bekleyiniz.',
         'Ödeme İşlemleri'
       );
       this.router.navigate(['/payment/', JSON.stringify(createdRental)]);
-    } else if (this.isAvailable == false) {
-      this.toastrService.error(
-        'Araç kiralama işlemi gerçekleştirilemedi!',
-        'Araç Kullanımda'
-      );
-    }
-  }
-
-  totalAmount() {
-    if (this.rentDate != null && this.returnDate != null) {
-      var returnDate = new Date(this.returnDate.toString());
-      var rentDate = new Date(this.rentDate.toString());
-      var difference = returnDate.getTime() - rentDate.getTime();
-
-      this.rentDay = Math.ceil(difference / (1000 * 3600 * 24));
-
-      this.paymentAmount = this.rentDay * this.carDetail.dailyPrice;
     }
   }
 }

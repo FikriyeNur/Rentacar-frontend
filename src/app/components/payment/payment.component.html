@@ -4,7 +4,7 @@
   <div class="card-body">
     <table class="table">
       <thead>
-        <tr>  
+        <tr>
           <th scope="col">Marka</th>
           <th scope="col">Model</th>
           <th scope="col">Kiralama Tarihi</th>
@@ -49,6 +49,7 @@
                 formControlName="nameOnCard"
                 placeholder="Kart sahibinin adı ve soyadı"
                 [(ngModel)]="cardName"
+                required
               />
             </div>
           </div>
@@ -64,10 +65,12 @@
                 formControlName="cardNumber"
                 placeholder=" ••••   ••••   ••••   ••••"
                 [(ngModel)]="cardNumber"
+                required
               />
             </div>
           </div>
         </div>
+
         <div class="row">
           <div class="col-md-3">
             <label for="expirationDate">Son Kullanma Tarihi</label>
@@ -80,10 +83,8 @@
                       class="form-control"
                       formControlName="expirationDateMonth"
                       placeholder="Ay"
-                      max="12"
-                      min="1"
-                      [(ngModel)]="expirationDateMonth"
-                      (input)="dateControl()"
+                      [(ngModel)]="expirationMonth"
+                      required
                     />
                   </div>
                 </div>
@@ -99,16 +100,15 @@
                       class="form-control"
                       formControlName="expirationDateYear"
                       placeholder="Yıl"
-                      max="2100"
-                      min="{{ getMinYear() }}"
-                      [(ngModel)]="expirationDateYear"
-                      (input)="dateControl()"
+                      [(ngModel)]="expirationYear"
+                      required
                     />
                   </div>
                 </div>
               </div>
             </div>
           </div>
+
           <div class="col-md-2">
             <div class="mb-3">
               <div class="form-group">
@@ -122,15 +122,18 @@
                   formControlName="cvv"
                   placeholder="CVC/CVV"
                   [(ngModel)]="cardCvv"
+                  required
                 />
               </div>
             </div>
           </div>
         </div>
       </form>
+    </div>
+    <div class="card-footer">
       <div class="row">
         <div class="col-md-6" style="text-align: end">
-          <button (click)="createPayment()" class="btn btn-success">
+          <button (click)="addCreditCard()" class="btn btn-success">
             Ödemeyi Gerçekleştir
           </button>
         </div>

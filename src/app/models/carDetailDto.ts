@@ -1,13 +1,8 @@
-export interface CarDetailDto {
-  carId: number;
-  brandId: number;
+import { Car } from "./car";
+
+export interface CarDetailDto extends Car {
   brandName: string;
-  modelId: number;
   modelName: string;
-  modelYear: string;
-  colorId: number;
   colorName: string;
-  dailyPrice: number;
-  description: string;
   imagePath: string;
 }

@@ -1,0 +1,138 @@
+<br />
+<div class="content">
+  <div class="col-md-12" style="display: inline-block">
+    <div class="card">
+      <div class="card-header">
+        <h5 class="title">Araba Ekle</h5>
+      </div>
+      <div class="card-body">
+        <form [formGroup]="carAddForm">
+          <div class="mb-3">
+            <label for="brandId">Marka Seçiniz</label>
+            <div class="form-group">
+              <input
+              type="number"
+              id="brandId"
+              formControlName="brandId"
+              class="form-control"
+              placeholder="Marka Id giriniz.."
+            />
+              <!-- <select
+                class="form-select"
+                id="brandId"
+                formControlName="brandId"
+              >
+                <option
+                  class="form-select mb-3"
+                  *ngFor="let brand of brands"
+                  value="{{ brand.brandId }}"
+                  [selected]="getSelectedBrand(brand.brandId)"
+                >
+                  {{ brand.brandName }}
+                </option>
+              </select> -->
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label for="modelId">Model Seçiniz</label>
+            <div class="form-group">
+              <input
+              type="number"
+              id="modelId"
+              formControlName="modelId"
+              class="form-control"
+              placeholder="Model Id giriniz.."
+            />
+              <!-- <select
+                class="form-select"
+                id="modelId"
+                formControlName="modelId"
+              >
+                <option
+                  class="form-select mb-3"
+                  *ngFor="let model of models"
+                  value="{{ model.modelId }}"
+                  [selected]="getSelectedModel(model.modelId)"
+                >
+                  {{ model.modelName }}
+                </option>
+              </select> -->
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label for="colorId">Renk Seçiniz</label>
+            <div class="form-group">
+              <input
+                type="number"
+                id="colorId"
+                formControlName="colorId"
+                class="form-control"
+                placeholder="Renk Id giriniz.."
+              />
+              <!-- <select
+                class="form-select"
+                id="colorId"
+                formControlName="colorId"
+              >
+                <option
+                  class="form-select mb-3"
+                  *ngFor="let color of colors"
+                  value="{{ color.colorId }}"
+                  [selected]="getSelectedColor(color.colorId)"
+                >
+                  {{ color.colorName }}
+                </option>
+              </select> -->
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label for="modelYear">Model Yılı</label>
+            <div class="form-group">
+              <input
+                type="text"
+                id="modelYear"
+                formControlName="modelYear"
+                class="form-control"
+                placeholder="Araç model yılı giriniz.."
+              />
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label for="dailyPrice">Günlük Fiyat</label>
+            <div class="form-group">
+              <input
+                type="number"
+                id="dailyPrice"
+                formControlName="dailyPrice"
+                class="form-control"
+                placeholder="Günlük araç fiyatı giriniz.."
+              />
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label for="description">Açıklama</label>
+            <div class="form-group">
+              <input
+                type="text"
+                id="description"
+                formControlName="description"
+                class="form-control"
+                placeholder="Araç açıklaması giriniz.."
+              />
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="card-footer">
+        <div class="d-grid gap-2 col-4 mx-auto">
+          <button class="btn btn-success" (click)="addCar()">Ekle</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

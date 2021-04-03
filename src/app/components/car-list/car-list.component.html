@@ -1,0 +1,29 @@
+<br />
+<button type="button" class="btn btn-info" routerLink="/cars/add">Araç Ekle</button>
+<br /><br />
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Marka</th>
+      <th scope="col">Model</th>
+      <th scope="col">Model Yılı</th>
+      <th scope="col">Renk</th>
+      <th scope="col">Günlük Fiyat</th>
+      <th scope="col">Araç Bilgileri</th>
+      <th>Araç Bilgilerini Güncelle</th>
+      <th>Aracı Sil</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let cars of carList">
+      <td>{{ cars.brandName }}</td>
+      <td>{{ cars.modelName }}</td>
+      <td>{{ cars.modelYear }}</td>
+      <td>{{ cars.colorName }}</td>
+      <td>{{ cars.dailyPrice }}</td>
+      <td>{{ cars.description }}</td>
+      <td><button type="button" class="btn btn-success">Bilgileri Güncelle</button></td>
+      <td><button type="button" class="btn btn-danger">Aracı Sil</button></td>
+    </tr>
+  </tbody>
+</table>
