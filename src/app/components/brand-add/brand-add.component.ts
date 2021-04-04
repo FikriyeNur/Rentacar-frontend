@@ -50,7 +50,7 @@ export class BrandAddComponent implements OnInit {
             ) {
               this.toastrService.error(
                 responseError.error.ValidationErrors[i].ErrorMessage,
-                'Hata'
+                'Doğrulama Hatası'
               );
             }
           }

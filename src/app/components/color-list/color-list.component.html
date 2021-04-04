@@ -1,1 +1,38 @@
-<p>color-list works!</p>
+<br />
+<button type="button" class="btn btn-info" routerLink="/color/add">
+  Renk Ekle
+</button>
+<br /><br />
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Renk</th>
+      <th>Güncelle</th>
+      <th>Sil</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let colors of colorList">
+      <td>{{ colors.colorName }}</td>
+
+      <td>
+        <button
+          type="button"
+          class="btn btn-success"
+          routerLink="/color/update/{{ colors.colorId }}"
+        >
+          Güncelle
+        </button>
+      </td>
+      <td>
+        <button
+          type="button"
+          class="btn btn-danger"
+          routerLink="/color/delete/{{ colors.colorId }}"
+        >
+          Sil
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>

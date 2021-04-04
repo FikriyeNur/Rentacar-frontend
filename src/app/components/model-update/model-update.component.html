@@ -1,1 +1,71 @@
-<p>model-update works!</p>
+<br />
+<div class="content">
+    <div class="col-md-12" style="display: inline-block">
+        <div class="card">
+            <div class="card-header">
+            <h5 class="title text-center">Model Bilglerini Güncelle</h5>
+          </div>
+          <div class="card-body">
+              <form [formGroup]="modelUpdateForm">
+                <div class="mb-3">
+                    <label for="modelId">Model Id</label>
+                    <div class="form-group">
+                      <input
+                        type="number"
+                        id="modelId"
+                        formControlName="modelId"
+                        class="form-control"
+                        [readonly]="disableSelect"
+                      />
+                    </div>
+                  </div>
+                  <div class="mb-3">
+                    <label for="brandId">Marka</label>
+                    <div class="form-group">
+                      <select
+                        class="form-control form-select mb-3"
+                        name="brandId"
+                        id="brandId"
+                        type="number"
+                        formControlName="brandId"
+                      >
+                        <option *ngFor="let brand of brands" [ngValue]="brand.brandId">
+                          {{ brand.brandName }}
+                        </option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="mb-3">
+                    <label for="modelName">Model</label>
+                    <div class="form-group">
+                      <input
+                        type="text"
+                        id="modelName"
+                        formControlName="modelName"
+                        class="form-control"
+                      />
+                    </div>
+                  </div>
+              </form>
+          </div>
+          <div class="card-footer">
+            <div class="row">
+              <div class="col-md-6" style="text-align: end">
+                <button (click)="updateModel()" class="btn btn-success">
+                  Güncelle
+                </button>
+              </div>
+              <div class="col-md-6" style="text-align: start">
+                <button
+                  class="btn btn-fill btn-info"
+                  routerLink="/model/list"
+                >
+                  Model Listesine Dön
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+</div>
+

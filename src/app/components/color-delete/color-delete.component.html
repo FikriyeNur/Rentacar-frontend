@@ -1,1 +1,56 @@
-<p>color-delete works!</p>
+<br />
+<div class="content">
+    <div class="col-md-12" style="display: inline-block">
+        <div class="card">
+            <div class="card-header">
+            <h5 class="title text-center">Rengi Sil</h5>
+          </div>
+          <div class="card-body">
+              <form [formGroup]="colorDeleteForm">
+                <div class="mb-3">
+                    <label for="colorId">Renk Id</label>
+                    <div class="form-group">
+                      <input
+                        type="number"
+                        id="colorId"
+                        formControlName="colorId"
+                        class="form-control"
+                        [readonly]="disableSelect"
+                      />
+                    </div>
+                  </div>
+                  <div class="mb-3">
+                    <label for="colorName">Renk</label>
+                    <div class="form-group">
+                      <input
+                        type="text"
+                        id="colorName"
+                        formControlName="colorName"
+                        class="form-control"
+                        [readonly]="disableSelect"
+                      />
+                    </div>
+                  </div>
+              </form>
+          </div>
+          <div class="card-footer">
+            <div class="row">
+              <div class="col-md-6" style="text-align: end">
+                <button (click)="deleteColor()" class="btn btn-danger">
+                  Rengi Sil
+                </button>
+              </div>
+              <div class="col-md-6" style="text-align: start">
+                <button
+                  class="btn btn-fill btn-info"
+                  routerLink="/color/list"
+                >
+                  Renk Listesine Dön
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+</div>
+

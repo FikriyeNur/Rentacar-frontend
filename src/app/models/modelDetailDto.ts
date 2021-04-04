@@ -1,6 +1,5 @@
-export interface ModelDetailDto{
-    modelId:number;
-    brandName:string;
-    modelName:string;
-    
+import { Model } from "./model";
+
+export interface ModelDetailDto extends Model {
+  brandName: string;
 }

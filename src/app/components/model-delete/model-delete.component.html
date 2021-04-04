@@ -1,1 +1,68 @@
-<p>model-delete works!</p>
+<br />
+<div class="content">
+    <div class="col-md-12" style="display: inline-block">
+        <div class="card">
+            <div class="card-header">
+            <h5 class="title text-center">Modeli Sil</h5>
+          </div>
+          <div class="card-body">
+              <form [formGroup]="modelDeleteForm">
+                <div class="mb-3">
+                    <label for="modelId">Model Id</label>
+                    <div class="form-group">
+                      <input
+                        type="number"
+                        id="modelId"
+                        formControlName="modelId"
+                        class="form-control"
+                        [readonly]="disableSelect"
+                      />
+                    </div>
+                  </div>
+                  <div class="mb-3">
+                    <label for="brandName">Marka</label>
+                    <div class="form-group">
+                      <input
+                        type="text"
+                        id="brandName"
+                        formControlName="brandName"
+                        class="form-control"
+                        [readonly]="disableSelect"
+                      />
+                    </div>
+                  </div>
+                  <div class="mb-3">
+                    <label for="modelName">Model</label>
+                    <div class="form-group">
+                      <input
+                        type="text"
+                        id="modelName"
+                        formControlName="modelName"
+                        class="form-control"
+                        [readonly]="disableSelect"
+                      />
+                    </div>
+                  </div>
+              </form>
+          </div>
+          <div class="card-footer">
+            <div class="row">
+              <div class="col-md-6" style="text-align: end">
+                <button (click)="deleteModel()" class="btn btn-danger">
+                  Modeli Sil
+                </button>
+              </div>
+              <div class="col-md-6" style="text-align: start">
+                <button
+                  class="btn btn-fill btn-info"
+                  routerLink="/model/list"
+                >
+                  Renk Listesine Dön
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+</div>
+
