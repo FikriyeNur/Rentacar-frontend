@@ -15,46 +15,46 @@
                 id="carId"
                 formControlName="carId"
                 class="form-control"
-                placeholder="Marka Id giriniz.."
+                [readonly]="disableSelect"
               />
             </div>
           </div>
           
           <div class="mb-3">
-            <label for="brandId">Marka Id</label>
+            <label for="brandName">Marka</label>
             <div class="form-group">
               <input
-                type="number"
-                id="brandId"
-                formControlName="brandId"
+                type="text"
+                id="brandName"
+                formControlName="brandName"
                 class="form-control"
-                placeholder="Marka Id giriniz.."
+                [readonly]="disableSelect"
               />
             </div>
           </div>
 
           <div class="mb-3">
-            <label for="modelId">Model Id</label>
+            <label for="modelName">Model</label>
             <div class="form-group">
               <input
-                type="number"
-                id="modelId"
-                formControlName="modelId"
+                type="text"
+                id="modelName"
+                formControlName="modelName"
                 class="form-control"
-                placeholder="Model Id giriniz.."
+                [readonly]="disableSelect"
               />
             </div>
           </div>
 
           <div class="mb-3">
-            <label for="colorId">Renk Id</label>
+            <label for="colorName">Renk</label>
             <div class="form-group">
               <input
-                type="number"
-                id="colorId"
-                formControlName="colorId"
+                type="text"
+                id="colorName"
+                formControlName="colorName"
                 class="form-control"
-                placeholder="Renk Id giriniz.."
+                [readonly]="disableSelect"
               />
             </div>
           </div>
@@ -67,7 +67,7 @@
                 id="modelYear"
                 formControlName="modelYear"
                 class="form-control"
-                placeholder="Araç model yılı giriniz.."
+                [readonly]="disableSelect"
               />
             </div>
           </div>
@@ -76,11 +76,11 @@
             <label for="dailyPrice">Günlük Fiyat</label>
             <div class="form-group">
               <input
-                type="number"
+                type="text"
                 id="dailyPrice"
                 formControlName="dailyPrice"
                 class="form-control"
-                placeholder="Günlük araç fiyatı giriniz.."
+                [readonly]="disableSelect"
               />
             </div>
           </div>
@@ -93,10 +93,11 @@
                 id="description"
                 formControlName="description"
                 class="form-control"
-                placeholder="Araç açıklaması giriniz.."
+                [readonly]="disableSelect"
               />
             </div>
           </div>
+
         </form>
       </div>
       <div class="card-footer">

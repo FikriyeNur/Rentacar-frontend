@@ -22,14 +22,10 @@ import { Router } from '@angular/router';
 })
 export class CarAddComponent implements OnInit {
   carAddForm: FormGroup;
-  isCarAdd: boolean = true;
 
   brands: Brand[];
   models: ModelDetailDto[];
   colors: Color[];
-  brandFilter: number;
-  modelFilter: number;
-  colorFilter: number;
 
   constructor(
     private carService: CarService,
@@ -62,18 +58,31 @@ export class CarAddComponent implements OnInit {
   addCar() {
     if (this.carAddForm.valid) {
       let carModel = Object.assign({}, this.carAddForm.value);
-      this.carService.add(carModel).subscribe((response) => {
-        if ((this.isCarAdd = response.success)) {
-          this.toastrService.success('Araç başarıyla eklendi', 'Başarılı');
+      this.carService.add(carModel).subscribe(
+        (response) => {
+          this.toastrService.success(response.message, 'Başarılı');
           this.router.navigate(['car/list']);
-        } else {
-          this.toastrService.error(
-            'Araç eklerken hata meydana geldi!',
-            'Başarısız'
-          );
-          this.router.navigate(['/cars']);
+        },
+        (responseError) => {
+          if (responseError.error.ValidationErrors.length > 0) {
+            for (
+              let i = 0;
+              i < responseError.error.ValidationErrors.length;
+              i++
+            ) {
+              this.toastrService.error(
+                responseError.error.ValidationErrors[i].ErrorMessage,
+                'Doğrulama Hatası'
+              );
+            }
+          }
         }
-      });
+      );
+    } else {
+      this.toastrService.error(
+        'Formu eksiksiz doldurduğunuzdan emin olunuz!',
+        'Hata'
+      );
     }
   }
 
@@ -93,29 +102,5 @@ export class CarAddComponent implements OnInit {
     this.colorService.getColors().subscribe((response) => {
       this.colors = response.data;
     });
-  }
-
-  getSelectedBrand(brandId: number) {
-    if (this.brandFilter == brandId) {
-      return true;
-    } else {
-      return false;
-    }
-  }
-
-  getSelectedModel(modelId: number) {
-    if (this.modelFilter == modelId) {
-      return true;
-    } else {
-      return false;
-    }
-  }
-
-  getSelectedColor(colorId: number) {
-    if (this.colorFilter == colorId) {
-      return true;
-    } else {
-      return false;
-    }
   }
 }

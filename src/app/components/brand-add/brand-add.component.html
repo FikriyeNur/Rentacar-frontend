@@ -1,0 +1,35 @@
+<br />
+<div class="content">
+  <button type="button" class="btn btn-info" routerLink="/brand/list">
+    Marka Listesine Dön
+  </button>
+</div>
+<br /><br />
+<div class="col-md-12" style="display: inline-block">
+    <div class="card">
+        <div class="card-header">
+            <h5 class="title text-center">Marka Ekle</h5>
+          </div>
+          <div class="card-body">
+              <form [formGroup]="brandAddForm">
+                <div class="mb-3">
+                    <label for="brandName">Marka</label>
+                    <div class="form-group">
+                      <input
+                        type="text"
+                        id="brandName"
+                        formControlName="brandName"
+                        class="form-control"
+                        placeholder="Marka giriniz.."
+                      />
+                    </div>
+                  </div>
+              </form>
+          </div>
+          <div class="card-footer">
+            <div class="d-grid gap-2 col-4 mx-auto">
+                <button class="btn btn-success" (click)="addBrand()">Ekle</button>
+              </div>
+          </div>
+    </div>
+</div>

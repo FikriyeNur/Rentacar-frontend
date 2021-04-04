@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { Car } from 'src/app/models/car';
+import { CarDetailDto } from 'src/app/models/carDetailDto';
 import { CarService } from 'src/app/services/car.service';
 
 @Component({
@@ -12,7 +12,8 @@ import { CarService } from 'src/app/services/car.service';
 })
 export class CarDeleteComponent implements OnInit {
   carDeleteForm: FormGroup;
-  car: Car;
+  car: CarDetailDto;
+  disableSelect: boolean = true;
 
   constructor(
     private carService: CarService,
@@ -26,45 +27,52 @@ export class CarDeleteComponent implements OnInit {
     this.activatedRoute.params.subscribe((params) => {
       if (params['carId']) {
         this.getCarById(params['carId']);
-        this.createCarDeleteForm();
       }
+    });
+  }
+
+  createCarDeleteForm(car: CarDetailDto) {
+    this.carDeleteForm = this.formBuilder.group({
+      carId: [car.carId, Validators.required],
+      brandName: [car.brandName, Validators.required],
+      modelName: [car.modelName, Validators.required],
+      colorName: [car.colorName, Validators.required],
+      modelYear: [car.modelYear, Validators.required],
+      dailyPrice: [car.dailyPrice, Validators.required],
+      description: [car.description, Validators.required],
     });
   }
 
   getCarById(carId: number) {
     this.carService.getCarDetails(carId).subscribe((response) => {
       this.car = response.data;
-      this.carDeleteForm.setValue({
-        carId:this.car.carId,
-        brandId: this.car.brandId,
-        modelId: this.car.modelId,
-        colorId: this.car.colorId,
-        modelYear: this.car.modelYear,
-        dailyPrice: this.car.dailyPrice,
-        description: this.car.description,
-      });
-    });
-  }
-
-  createCarDeleteForm() {
-    this.carDeleteForm = this.formBuilder.group({
-      carId:["", Validators.required],
-      brandId: ['', Validators.required],
-      modelId: ['', Validators.required],
-      colorId: ['', Validators.required],
-      modelYear: ['', Validators.required],
-      dailyPrice: ['', Validators.required],
-      description: ['', Validators.required],
+      this.createCarDeleteForm(this.car);
     });
   }
 
   deleteCar() {
     if (this.carDeleteForm.valid) {
       let carModel = Object.assign({}, this.carDeleteForm.value);
-      this.carService.delete(carModel).subscribe((response) => {
-        this.toastrService.success('Araç silindi.', 'Başarılı');
-        this.router.navigate(['car/list']);
-      });
+      this.carService.delete(carModel).subscribe(
+        (response) => {
+          this.toastrService.success(response.message, 'Başarılı');
+          this.router.navigate(['car/list']);
+        },
+        (responseError) => {
+          if (responseError.error.ValidationErrors.length > 0) {
+            for (
+              let i = 0;
+              i < responseError.error.ValidationErrors.length;
+              i++
+            ) {
+              this.toastrService.error(
+                responseError.error.ValidationErrors[i].ErrorMessage,
+                'Doğrulama Hatası'
+              );
+            }
+          }
+        }
+      );
     }
   }
 }

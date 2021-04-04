@@ -1,5 +1,9 @@
 <br />
 <div class="content">
+  <button type="button" class="btn btn-info" routerLink="/car/list">
+    Araç Listesine Dön
+  </button>
+  <br /><br />
   <div class="col-md-12" style="display: inline-block">
     <div class="card">
       <div class="card-header">
@@ -8,83 +12,53 @@
       <div class="card-body">
         <form [formGroup]="carAddForm">
           <div class="mb-3">
-            <label for="brandId">Marka Id</label>
+            <label for="brandId">Marka Seçiniz</label>
             <div class="form-group">
-              <input
-              type="number"
-              id="brandId"
-              formControlName="brandId"
-              class="form-control"
-              placeholder="Marka Id giriniz.."
-            />
-              <!-- <select
-                class="form-select"
+              <select
+                class="form-control form-select mb-3"
+                name="brandId"
                 id="brandId"
+                type="number"
                 formControlName="brandId"
               >
-                <option
-                  class="form-select mb-3"
-                  *ngFor="let brand of brands"
-                  value="{{ brand.brandId }}"
-                  [selected]="getSelectedBrand(brand.brandId)"
-                >
+                <option *ngFor="let brand of brands" [ngValue]="brand.brandId">
                   {{ brand.brandName }}
                 </option>
-              </select> -->
+              </select>
             </div>
           </div>
 
           <div class="mb-3">
-            <label for="modelId">Model Id</label>
+            <label for="modelId">Model Seçiniz</label>
             <div class="form-group">
-              <input
-              type="number"
-              id="modelId"
-              formControlName="modelId"
-              class="form-control"
-              placeholder="Model Id giriniz.."
-            />
-              <!-- <select
-                class="form-select"
+              <select
+                class="form-control form-select mb-3"
+                name="modelId"
                 id="modelId"
+                type="number"
                 formControlName="modelId"
               >
-                <option
-                  class="form-select mb-3"
-                  *ngFor="let model of models"
-                  value="{{ model.modelId }}"
-                  [selected]="getSelectedModel(model.modelId)"
-                >
+                <option *ngFor="let model of models" [ngValue]="model.modelId">
                   {{ model.modelName }}
                 </option>
-              </select> -->
+              </select>
             </div>
           </div>
 
           <div class="mb-3">
-            <label for="colorId">Renk Id</label>
+            <label for="colorId">Renk Seçiniz</label>
             <div class="form-group">
-              <input
+              <select
+                class="form-control form-select mb-3"
+                name="colorId"
+                id="colorId"
                 type="number"
-                id="colorId"
-                formControlName="colorId"
-                class="form-control"
-                placeholder="Renk Id giriniz.."
-              />
-              <!-- <select
-                class="form-select"
-                id="colorId"
                 formControlName="colorId"
               >
-                <option
-                  class="form-select mb-3"
-                  *ngFor="let color of colors"
-                  value="{{ color.colorId }}"
-                  [selected]="getSelectedColor(color.colorId)"
-                >
+                <option *ngFor="let color of colors" [ngValue]="color.colorId">
                   {{ color.colorName }}
                 </option>
-              </select> -->
+              </select>
             </div>
           </div>
 

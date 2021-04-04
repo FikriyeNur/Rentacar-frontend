@@ -1,0 +1,38 @@
+<br />
+<button type="button" class="btn btn-info" routerLink="/brand/add">
+  Marka Ekle
+</button>
+<br /><br />
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Marka</th>
+      <th>Güncelle</th>
+      <th>Sil</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let brands of brandList">
+      <td>{{ brands.brandName }}</td>
+
+      <td>
+        <button
+          type="button"
+          class="btn btn-success"
+          routerLink="/brand/update/{{ brands.brandId }}"
+        >
+          Güncelle
+        </button>
+      </td>
+      <td>
+        <button
+          type="button"
+          class="btn btn-danger"
+          routerLink="/brand/delete/{{ brands.brandId }}"
+        >
+          Sil
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>

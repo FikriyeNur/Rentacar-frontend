@@ -7,55 +7,66 @@
       </div>
       <div class="card-body">
         <form [formGroup]="carUpdateForm">
-            <div class="mb-3">
-                <label for="carId">Araç Id</label>
-                <div class="form-group">
-                  <input
-                    type="number"
-                    id="carId"
-                    formControlName="carId"
-                    class="form-control"
-                    placeholder="Marka Id giriniz.."
-                  />
-                </div>
-              </div>
+          <div class="mb-3">
+            <label for="carId">Araç Id</label>
+            <div class="form-group">
+              <input
+                type="number"
+                id="carId"
+                formControlName="carId"
+                class="form-control"
+                [readonly]="disableSelect"
+              />
+            </div>
+          </div>
 
           <div class="mb-3">
             <label for="brandId">Marka Id</label>
             <div class="form-group">
-              <input
-                type="number"
+              <select
+                class="form-control form-select mb-3"
+                name="brandId"
                 id="brandId"
+                type="number"
                 formControlName="brandId"
-                class="form-control"
-                placeholder="Marka Id giriniz.."
-              />
+              >
+                <option *ngFor="let brand of brands" [ngValue]="brand.brandId">
+                  {{ brand.brandName }}
+                </option>
+              </select>
             </div>
           </div>
 
           <div class="mb-3">
             <label for="modelId">Model Id</label>
             <div class="form-group">
-              <input
-                type="number"
+              <select
+                class="form-control form-select mb-3"
+                name="modelId"
                 id="modelId"
                 formControlName="modelId"
-                class="form-control"
-                placeholder="Model Id giriniz.."
-              />
+              >
+                <option *ngFor="let model of models" [ngValue]="model.modelId">
+                  {{ model.modelName }}
+                </option>
+              </select>
             </div>
           </div>
 
           <div class="mb-3">
             <label for="colorId">Renk Id</label>
             <div class="form-group">
-              <input
-                type="number"
+              <select
+                class="form-control form-select mb-3"
+                name="colorId"
                 id="colorId"
                 formControlName="colorId"
-                class="form-control"
-                placeholder="Renk Id giriniz.."
-              />
+                aria-label=".form-select-lg example"
+              >
+                <option *ngFor="let color of colors" [ngValue]="color.colorId">
+                  {{ color.colorName }}
+                </option>
+              </select>
             </div>
           </div>
 
@@ -67,7 +78,6 @@
                 id="modelYear"
                 formControlName="modelYear"
                 class="form-control"
-                placeholder="Araç model yılı giriniz.."
               />
             </div>
           </div>
@@ -80,7 +90,6 @@
                 id="dailyPrice"
                 formControlName="dailyPrice"
                 class="form-control"
-                placeholder="Günlük araç fiyatı giriniz.."
               />
             </div>
           </div>
@@ -93,12 +102,12 @@
                 id="description"
                 formControlName="description"
                 class="form-control"
-                placeholder="Araç açıklaması giriniz.."
               />
             </div>
           </div>
         </form>
       </div>
+
       <div class="card-footer">
         <div class="row">
           <div class="col-md-6" style="text-align: end">
@@ -107,7 +116,10 @@
             </button>
           </div>
           <div class="col-md-6" style="text-align: start">
-            <button class="btn btn-fill btn-info" routerLink="/car/list" (click)="updateCar()">
+            <button
+              class="btn btn-fill btn-info"
+              routerLink="/car/list"
+            >
               Araç Listesine Dön
             </button>
           </div>

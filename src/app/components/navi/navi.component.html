@@ -1,20 +1,58 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="container-fluid">
     <a class="navbar-brand">FNH Rent A Car</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" routerLink="/cars">Araçlar</a>
+          <a class="nav-link active" aria-current="page" routerLink="/cars"
+            >Araçlar</a
+          >
         </li>
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" routerLink="/customers">Müşteriler</a>
+          <a class="nav-link active" aria-current="page" routerLink="/customers"
+            >Müşteriler</a
+          >
         </li>
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" routerLink="/car/list">Araç İşlemleri</a>
-        </li> 
+
+        <div class="dropdown">
+          <button
+            class="btn btn-light dropdown-toggle"
+            type="button"
+            id="dropDawnMenu"
+            data-bs-toggle="dropdown"
+          >
+            Listeler
+          </button>
+          <ul class="dropdown-menu" aria-labelledby="dropDawnMenu">
+            <li>
+              <a class="dropdown-item" routerLink="/car/list">Araç Listesi</a>
+            </li>
+            <li>
+              <a class="dropdown-item" routerLink="/brand/list"
+                >Marka Listesi</a
+              >
+            </li>
+            <li>
+              <a class="dropdown-item" routerLink="/model/list"
+                >Model Listesi</a
+              >
+            </li>
+            <li>
+              <a class="dropdown-item" routerLink="/color/list">Renk Listesi</a>
+            </li>
+          </ul>
+        </div>
       </ul>
     </div>
   </div>
