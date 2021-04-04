@@ -76,7 +76,10 @@ export class CarUpdateComponent implements OnInit {
       this.carService.update(carModel).subscribe(
         (response) => {
           this.toastrService.success(response.message, 'Başarılı');
-          this.router.navigate(['car/list']);
+          this.toastrService.info("Araç listesine yönlendiriliyorsunuz..", "Yönlendirme")
+          setTimeout(()=>{
+            this.router.navigate(['car/list']);
+          }, 2000)
         },
         (responseError) => {
           if (responseError.error.ValidationErrors.length > 0) {

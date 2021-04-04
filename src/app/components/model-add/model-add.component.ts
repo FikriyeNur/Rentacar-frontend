@@ -42,7 +42,13 @@ export class ModelAddComponent implements OnInit {
       this.modelService.add(modelModel).subscribe(
         (response) => {
           this.toastrService.success(response.message, 'Başarılı');
-          this.router.navigate(['model/list']);
+          this.toastrService.info(
+            'Araç listesine yönlendiriliyorsunuz..',
+            'Yönlendirme'
+          );
+          setTimeout(() => {
+            this.router.navigate(['model/list']);
+          }, 2000);
         },
         (responseError) => {
           if (responseError.error.ValidationErrors.length > 0) {

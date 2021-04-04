@@ -39,7 +39,13 @@ export class BrandAddComponent implements OnInit {
       this.brandService.add(brandModel).subscribe(
         (response) => {
           this.toastrService.success(response.message, 'Başarılı');
-          this.router.navigate(['brand/list']);
+          this.toastrService.info(
+            'Araç listesine yönlendiriliyorsunuz..',
+            'Yönlendirme'
+          );
+          setTimeout(() => {
+            this.router.navigate(['brand/list']);
+          }, 2000);
         },
         (responseError) => {
           if (responseError.error.ValidationErrors.length > 0) {

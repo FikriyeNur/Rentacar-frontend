@@ -18,13 +18,13 @@ import { BrandService } from 'src/app/services/brand.service';
 export class BrandDeleteComponent implements OnInit {
   brandDeleteForm: FormGroup;
   brand: Brand;
-  disableSelect:boolean=true;
+  disableSelect: boolean = true;
 
   constructor(
     private brandService: BrandService,
     private formBuilder: FormBuilder,
     private toastrService: ToastrService,
-    private activatedRoute:ActivatedRoute,
+    private activatedRoute: ActivatedRoute,
     private router: Router
   ) {}
 
@@ -56,7 +56,13 @@ export class BrandDeleteComponent implements OnInit {
       this.brandService.delete(brandModel).subscribe(
         (response) => {
           this.toastrService.success(response.message, 'Başarılı');
-          this.router.navigate(['brand/list']);
+          this.toastrService.info(
+            'Araç listesine yönlendiriliyorsunuz..',
+            'Yönlendirme'
+          );
+          setTimeout(() => {
+            this.router.navigate(['brand/list']);
+          }, 2000);
         },
         (responseError) => {
           if (responseError.error.ValidationErrors.length > 0) {
