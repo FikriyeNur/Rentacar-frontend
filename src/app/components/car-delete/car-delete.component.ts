@@ -56,10 +56,13 @@ export class CarDeleteComponent implements OnInit {
       this.carService.delete(carModel).subscribe(
         (response) => {
           this.toastrService.success(response.message, 'Başarılı');
-          this.toastrService.info("Araç listesine yönlendiriliyorsunuz..", "Yönlendirme")
-          setTimeout(()=>{
+          this.toastrService.info(
+            'Araç listesine yönlendiriliyorsunuz..',
+            'Yönlendirme'
+          );
+          setTimeout(() => {
             this.router.navigate(['car/list']);
-          }, 2000)
+          }, 2000);
         },
         (responseError) => {
           if (responseError.error.ValidationErrors.length > 0) {
